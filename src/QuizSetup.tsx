@@ -12,9 +12,12 @@ import {
 import { useState } from "react";
 
 type Difficulty = "easy" | "medium" | "hard";
+type QuestionType = "multipleChoice" | "trueOrFalse";
 
 function QuizSetup() {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [questionType, setQuestionType] =
+    useState<QuestionType>("multipleChoice");
 
   return (
     <>
@@ -42,6 +45,18 @@ function QuizSetup() {
             <Radio value="easy">Easy</Radio>
             <Radio value="medium">Medium</Radio>
             <Radio value="hard">Hard</Radio>
+          </Stack>
+        </RadioGroup>
+
+        <RadioGroup
+          onChange={(nextVal: string) =>
+            setQuestionType(nextVal as QuestionType)
+          }
+          value={questionType}
+        >
+          <Stack direction="row">
+            <Radio value="multipleChoice">Multiple Choice</Radio>
+            <Radio value="trueOrFalse">True or False</Radio>
           </Stack>
         </RadioGroup>
       </HStack>
