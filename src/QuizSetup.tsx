@@ -8,16 +8,38 @@ import {
   RadioGroup,
   Stack,
   HStack,
+  Select,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 type Difficulty = "easy" | "medium" | "hard";
 type QuestionType = "multipleChoice" | "trueOrFalse";
+
+interface Category {
+  id: number;
+  name: string;
+}
 
 function QuizSetup() {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [questionType, setQuestionType] =
     useState<QuestionType>("multipleChoice");
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchAndStoreAllCategories() {
+      try {
+        const response = await axios.get(
+          "https://opentdb.com/api_category.php"
+        );
+        setAllCategories(response.data.trivia_categories);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchAndStoreAllCategories();
+  }, []);
 
   return (
     <>
@@ -59,6 +81,14 @@ function QuizSetup() {
             <Radio value="trueOrFalse">True or False</Radio>
           </Stack>
         </RadioGroup>
+
+        <Select placeholder="Category">
+          {allCategories.map((data) => (
+            <option key={data.id} value={data.name}>
+              {data.name}
+            </option>
+          ))}
+        </Select>
       </HStack>
     </>
   );
