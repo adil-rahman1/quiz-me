@@ -32,6 +32,7 @@ interface IQuestion {
 }
 
 function QuizSetup() {
+  const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
@@ -66,12 +67,15 @@ function QuizSetup() {
     <>
       <HStack spacing="24px">
         <NumberInput
-          size="sm"
-          maxW={20}
-          defaultValue={10}
+          size="lg"
+          maxW={32}
+          defaultValue={numberOfQuestions}
           min={10}
           max={50}
           step={5}
+          onChange={(stringVal: string, numVal: number) => {
+            setNumberOfQuestions(numVal);
+          }}
         >
           <NumberInputField />
           <NumberInputStepper>
