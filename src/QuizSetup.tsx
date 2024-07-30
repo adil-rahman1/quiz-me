@@ -9,23 +9,33 @@ import {
   Stack,
   HStack,
   Select,
+  Button,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 type Difficulty = "easy" | "medium" | "hard";
-type QuestionType = "multipleChoice" | "trueOrFalse";
+type QuestionType = "multiple" | "boolean";
 
-interface Category {
+interface ICategoryInfo {
   id: number;
   name: string;
 }
 
+interface IQuestion {
+  type: "multiple" | "boolean";
+  difficulty: Difficulty;
+  category: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+}
+
 function QuizSetup() {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
-  const [questionType, setQuestionType] =
-    useState<QuestionType>("multipleChoice");
-  const [allCategories, setAllCategories] = useState<Category[]>([]);
+  const [questionType, setQuestionType] = useState<QuestionType>("multiple");
+  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
+  const [questions, setQuestions] = useState<IQuestion[]>([]);
 
   useEffect(() => {
     async function fetchAndStoreAllCategories() {
@@ -40,6 +50,17 @@ function QuizSetup() {
     }
     fetchAndStoreAllCategories();
   }, []);
+
+  async function handleGenerateQuiz() {
+    try {
+      const response = await axios.get(
+        `https://opentdb.com/api.php?amount=${5}&category=${9}&difficulty=${difficulty}&type=${questionType}`
+      );
+      setQuestions(response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -77,8 +98,8 @@ function QuizSetup() {
           value={questionType}
         >
           <Stack direction="row">
-            <Radio value="multipleChoice">Multiple Choice</Radio>
-            <Radio value="trueOrFalse">True or False</Radio>
+            <Radio value="multiple">Multiple Choice</Radio>
+            <Radio value="boolean">True or False</Radio>
           </Stack>
         </RadioGroup>
 
@@ -89,6 +110,9 @@ function QuizSetup() {
             </option>
           ))}
         </Select>
+        <Button onClick={handleGenerateQuiz} colorScheme="blue">
+          Begin
+        </Button>
       </HStack>
     </>
   );
