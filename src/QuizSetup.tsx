@@ -35,6 +35,11 @@ function QuizSetup() {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
+  const [selectedCategoryInfo, setSelectedCategoryInfo] =
+    useState<ICategoryInfo>({
+      id: -1,
+      name: "",
+    });
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
   const [questions, setQuestions] = useState<IQuestion[]>([]);
 
@@ -55,7 +60,9 @@ function QuizSetup() {
   async function handleGenerateQuiz() {
     try {
       const response = await axios.get(
-        `https://opentdb.com/api.php?amount=${5}&category=${9}&difficulty=${difficulty}&type=${questionType}`
+        `https://opentdb.com/api.php?amount=${5}&category=${
+          selectedCategoryInfo.id
+        }&difficulty=${difficulty}&type=${questionType}`
       );
       setQuestions(response.data.results);
     } catch (error) {
@@ -107,14 +114,29 @@ function QuizSetup() {
           </Stack>
         </RadioGroup>
 
-        <Select placeholder="Category">
+        <Select
+          onChange={(e) => {
+            const categoryInfo: ICategoryInfo = allCategories.filter(
+              (catInfo: ICategoryInfo) => catInfo.name === e.target.value
+            )[0];
+            setSelectedCategoryInfo({
+              id: categoryInfo.id,
+              name: categoryInfo.name,
+            });
+          }}
+          placeholder="Category"
+        >
           {allCategories.map((data) => (
             <option key={data.id} value={data.name}>
               {data.name}
             </option>
           ))}
         </Select>
-        <Button onClick={handleGenerateQuiz} colorScheme="blue">
+        <Button
+          onClick={handleGenerateQuiz}
+          colorScheme="blue"
+          isDisabled={selectedCategoryInfo.name === "" ? true : false}
+        >
           Begin
         </Button>
       </HStack>
