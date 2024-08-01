@@ -13,23 +13,12 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-type Difficulty = "easy" | "medium" | "hard";
-type QuestionType = "multiple" | "boolean";
-
-interface ICategoryInfo {
-  id: number;
-  name: string;
-}
-
-interface IQuestion {
-  type: "multiple" | "boolean";
-  difficulty: Difficulty;
-  category: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
+import {
+  Difficulty,
+  QuestionType,
+  ICategoryInfo,
+  IQuestionInfo,
+} from "./types";
 
 function QuizSetup() {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
@@ -41,7 +30,7 @@ function QuizSetup() {
       name: "",
     });
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
 
   useEffect(() => {
     async function fetchAndStoreAllCategories() {
@@ -60,9 +49,7 @@ function QuizSetup() {
   async function handleGenerateQuiz() {
     try {
       const response = await axios.get(
-        `https://opentdb.com/api.php?amount=${5}&category=${
-          selectedCategoryInfo.id
-        }&difficulty=${difficulty}&type=${questionType}`
+        `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
       setQuestions(response.data.results);
     } catch (error) {
@@ -80,7 +67,7 @@ function QuizSetup() {
           min={10}
           max={50}
           step={5}
-          onChange={(stringVal: string, numVal: number) => {
+          onChange={(_stringVal: string, numVal: number) => {
             setNumberOfQuestions(numVal);
           }}
         >
