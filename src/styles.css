@@ -1,0 +1,11 @@
+.header {
+  margin-bottom: 3rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.quiz-setup {
+  width: 60%;
+  margin: auto auto;
+}

@@ -12,6 +12,7 @@ import {
   VStack,
   FormControl,
   FormLabel,
+  HStack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -64,70 +65,82 @@ function QuizSetup() {
     <>
       <FormControl>
         <VStack className="quiz-setup" spacing="24px">
-          <FormLabel>Number of questions</FormLabel>
-          <NumberInput
-            size="lg"
-            maxW={32}
-            defaultValue={numberOfQuestions}
-            min={10}
-            max={50}
-            step={5}
-            onChange={(_stringVal: string, numVal: number) => {
-              setNumberOfQuestions(numVal);
-            }}
-          >
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <FormLabel>Select difficulty</FormLabel>
+          <HStack>
+            <FormLabel>Number of questions</FormLabel>
+            <NumberInput
+              size="lg"
+              maxW={32}
+              defaultValue={numberOfQuestions}
+              min={10}
+              max={50}
+              step={5}
+              onChange={(_stringVal: string, numVal: number) => {
+                setNumberOfQuestions(numVal);
+              }}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </HStack>
+          <HStack>
+            <FormLabel>Select difficulty</FormLabel>
 
-          <RadioGroup
-            onChange={(nextVal: string) => setDifficulty(nextVal as Difficulty)}
-            value={difficulty}
-          >
-            <Stack direction="row">
-              <Radio value="easy">Easy</Radio>
-              <Radio value="medium">Medium</Radio>
-              <Radio value="hard">Hard</Radio>
-            </Stack>
-          </RadioGroup>
-          <FormLabel>Select question type</FormLabel>
+            <RadioGroup
+              onChange={(nextVal: string) =>
+                setDifficulty(nextVal as Difficulty)
+              }
+              value={difficulty}
+            >
+              <Stack direction="row">
+                <Radio value="easy">Easy</Radio>
+                <Radio value="medium">Medium</Radio>
+                <Radio value="hard">Hard</Radio>
+              </Stack>
+            </RadioGroup>
+          </HStack>
 
-          <RadioGroup
-            onChange={(nextVal: string) =>
-              setQuestionType(nextVal as QuestionType)
-            }
-            value={questionType}
-          >
-            <Stack direction="row">
-              <Radio value="multiple">Multiple Choice</Radio>
-              <Radio value="boolean">True or False</Radio>
-            </Stack>
-          </RadioGroup>
-          <FormLabel>Select category</FormLabel>
+          <HStack>
+            <FormLabel>Select question type</FormLabel>
 
-          <Select
-            size="md"
-            onChange={(e) => {
-              const categoryInfo: ICategoryInfo = allCategories.filter(
-                (catInfo: ICategoryInfo) => catInfo.name === e.target.value
-              )[0];
-              setSelectedCategoryInfo({
-                id: categoryInfo.id,
-                name: categoryInfo.name,
-              });
-            }}
-            placeholder="Category"
-          >
-            {allCategories.map((data) => (
-              <option key={data.id} value={data.name}>
-                {data.name}
-              </option>
-            ))}
-          </Select>
+            <RadioGroup
+              onChange={(nextVal: string) =>
+                setQuestionType(nextVal as QuestionType)
+              }
+              value={questionType}
+            >
+              <Stack direction="row">
+                <Radio value="multiple">Multiple Choice</Radio>
+                <Radio value="boolean">True or False</Radio>
+              </Stack>
+            </RadioGroup>
+          </HStack>
+
+          <HStack>
+            <FormLabel>Select category</FormLabel>
+
+            <Select
+              size="md"
+              onChange={(e) => {
+                const categoryInfo: ICategoryInfo = allCategories.filter(
+                  (catInfo: ICategoryInfo) => catInfo.name === e.target.value
+                )[0];
+                setSelectedCategoryInfo({
+                  id: categoryInfo.id,
+                  name: categoryInfo.name,
+                });
+              }}
+              placeholder="Category"
+            >
+              {allCategories.map((data) => (
+                <option key={data.id} value={data.name}>
+                  {data.name}
+                </option>
+              ))}
+            </Select>
+          </HStack>
           <Button
             onClick={handleGenerateQuiz}
             colorScheme="blue"
