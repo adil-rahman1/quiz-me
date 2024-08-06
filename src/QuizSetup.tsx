@@ -23,8 +23,21 @@ import {
   IQuestionInfo,
 } from "./types";
 import "./styles.css";
+import { Dispatch, SetStateAction } from "react";
 
-function QuizSetup() {
+interface QuizSetupProps {
+  setQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
+  allCategories: ICategoryInfo[];
+  setAllCategories: Dispatch<SetStateAction<ICategoryInfo[]>>;
+  setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function QuizSetup({
+  setQuestions,
+  allCategories,
+  setAllCategories,
+  setQuizStarted,
+}: QuizSetupProps) {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
@@ -33,8 +46,6 @@ function QuizSetup() {
       id: -1,
       name: "",
     });
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
-  const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
 
   useEffect(() => {
     async function fetchAndStoreAllCategories() {
@@ -56,6 +67,7 @@ function QuizSetup() {
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
       setQuestions(response.data.results);
+      setQuizStarted(true);
     } catch (error) {
       console.error(error);
     }
