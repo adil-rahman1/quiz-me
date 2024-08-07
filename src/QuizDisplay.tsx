@@ -14,7 +14,7 @@ function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
   return (
     <div>
       <SingleQuestion
-        question={allQuestions[currentQNo]}
+        questionInfo={allQuestions[currentQNo]}
         setCurrentQNo={setCurrentQNo}
       ></SingleQuestion>
       <Button onClick={() => setQuizStarted(false)} colorScheme="blue">

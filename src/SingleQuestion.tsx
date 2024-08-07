@@ -3,11 +3,11 @@ import { IQuestionInfo } from "./types";
 import { useState } from "react";
 
 interface SingleQuestionProps {
-  question: IQuestionInfo;
+  questionInfo: IQuestionInfo;
   setCurrentQNo: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function SingleQuestion({ question, setCurrentQNo }: SingleQuestionProps) {
+function SingleQuestion({ questionInfo, setCurrentQNo }: SingleQuestionProps) {
   const [nextButtonIsDisabled, setNextButtonIsDisabled] =
     useState<boolean>(true);
 
@@ -22,9 +22,9 @@ function SingleQuestion({ question, setCurrentQNo }: SingleQuestionProps) {
 
   return (
     <>
-      <h1>{question.question}</h1>
-      <p>{question.correct_answer}</p>
-      <p>{question.incorrect_answers.join(" ")}</p>
+      <h1>{questionInfo.question}</h1>
+      <p>{questionInfo.correct_answer}</p>
+      <p>{questionInfo.incorrect_answers.join(" ")}</p>
       <hr />
       <Button onClick={handleSubmitAnswer} colorScheme="blue">
         Submit
