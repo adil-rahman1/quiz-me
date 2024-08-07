@@ -13,7 +13,10 @@ function QuestionDisplay({ questions, setQuizStarted }: QuestionDisplayProps) {
 
   return (
     <div>
-      <SingleQuestion question={questions[currentQNo]}></SingleQuestion>
+      <SingleQuestion
+        question={questions[currentQNo]}
+        setCurrentQNo={setCurrentQNo}
+      ></SingleQuestion>
       <Button onClick={() => setQuizStarted(false)} colorScheme="blue">
         Back to start
       </Button>
