@@ -2,10 +2,10 @@ import { useState } from "react";
 import Header from "./Header";
 import QuizSetup from "./QuizSetup";
 import { ICategoryInfo, IQuestionInfo } from "./types";
-import QuestionDisplay from "./QuestionDisplay";
+import QuizDisplay from "./QuizDisplay";
 
 function App() {
-  const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
+  const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
 
@@ -14,17 +14,17 @@ function App() {
       <Header></Header>
       {!quizStarted && (
         <QuizSetup
-          setQuestions={setQuestions}
+          setAllQuestions={setAllQuestions}
           allCategories={allCategories}
           setAllCategories={setAllCategories}
           setQuizStarted={setQuizStarted}
         ></QuizSetup>
       )}
       {quizStarted && (
-        <QuestionDisplay
-          questions={questions}
+        <QuizDisplay
+          allQuestions={allQuestions}
           setQuizStarted={setQuizStarted}
-        ></QuestionDisplay>
+        ></QuizDisplay>
       )}
     </>
   );

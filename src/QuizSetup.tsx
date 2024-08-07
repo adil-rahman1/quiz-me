@@ -26,14 +26,14 @@ import "./styles.css";
 import { Dispatch, SetStateAction } from "react";
 
 interface QuizSetupProps {
-  setQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
+  setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
   allCategories: ICategoryInfo[];
   setAllCategories: Dispatch<SetStateAction<ICategoryInfo[]>>;
   setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function QuizSetup({
-  setQuestions,
+  setAllQuestions,
   allCategories,
   setAllCategories,
   setQuizStarted,
@@ -66,7 +66,7 @@ function QuizSetup({
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
-      setQuestions(response.data.results);
+      setAllQuestions(response.data.results);
       setQuizStarted(true);
     } catch (error) {
       console.error(error);

@@ -3,18 +3,18 @@ import SingleQuestion from "./SingleQuestion";
 import { IQuestionInfo } from "./types";
 import { Button } from "@chakra-ui/react";
 
-interface QuestionDisplayProps {
-  questions: IQuestionInfo[];
+interface QuizDisplayProps {
+  allQuestions: IQuestionInfo[];
   setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function QuestionDisplay({ questions, setQuizStarted }: QuestionDisplayProps) {
+function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
   const [currentQNo, setCurrentQNo] = useState<number>(0);
 
   return (
     <div>
       <SingleQuestion
-        question={questions[currentQNo]}
+        question={allQuestions[currentQNo]}
         setCurrentQNo={setCurrentQNo}
       ></SingleQuestion>
       <Button onClick={() => setQuizStarted(false)} colorScheme="blue">
@@ -24,4 +24,4 @@ function QuestionDisplay({ questions, setQuizStarted }: QuestionDisplayProps) {
   );
 }
 
-export default QuestionDisplay;
+export default QuizDisplay;
