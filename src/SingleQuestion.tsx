@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { IQuestionInfo } from "./types";
 import { useState } from "react";
+import shuffle from "./shuffleArray";
 
 interface SingleQuestionProps {
   questionInfo: IQuestionInfo;
@@ -8,8 +9,18 @@ interface SingleQuestionProps {
 }
 
 function SingleQuestion({ questionInfo, setCurrentQNo }: SingleQuestionProps) {
+  const [answerSelected, setAnswerSelected] = useState<boolean>(false);
   const [nextButtonIsDisabled, setNextButtonIsDisabled] =
     useState<boolean>(true);
+
+  const possibleAnswersShuffled = shuffle([
+    ...questionInfo.incorrect_answers,
+    questionInfo.correct_answer,
+  ]);
+
+  function handleSelectAnAnswer() {
+    setAnswerSelected((prev) => !prev);
+  }
 
   function handleSubmitAnswer() {
     setNextButtonIsDisabled(false);
@@ -17,16 +28,29 @@ function SingleQuestion({ questionInfo, setCurrentQNo }: SingleQuestionProps) {
 
   function handleNextQuestion() {
     setCurrentQNo((prev) => prev + 1);
+    setAnswerSelected(false);
     setNextButtonIsDisabled(true);
   }
 
   return (
     <>
       <h1>{questionInfo.question}</h1>
-      <p>{questionInfo.correct_answer}</p>
-      <p>{questionInfo.incorrect_answers.join(" ")}</p>
+      {possibleAnswersShuffled.map((ans, idx) => (
+        <Button
+          key={idx}
+          onClick={handleSelectAnAnswer}
+          colorScheme="blue"
+          variant="outline"
+        >
+          {ans}
+        </Button>
+      ))}
       <hr />
-      <Button onClick={handleSubmitAnswer} colorScheme="blue">
+      <Button
+        isDisabled={!answerSelected}
+        onClick={handleSubmitAnswer}
+        colorScheme="blue"
+      >
         Submit
       </Button>
       <Button
