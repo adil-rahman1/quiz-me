@@ -1,65 +1,52 @@
 import { Button } from "@chakra-ui/react";
 import { IQuestionInfo } from "./types";
-import { useState } from "react";
 import shuffle from "./shuffleArray";
+import { useEffect, useState } from "react";
 
 interface SingleQuestionProps {
   questionInfo: IQuestionInfo;
-  setCurrentQNo: React.Dispatch<React.SetStateAction<number>>;
+  selectedAnswer: number | null;
+  setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
+  answerIsSubmitted: boolean;
 }
 
-function SingleQuestion({ questionInfo, setCurrentQNo }: SingleQuestionProps) {
-  const [answerSelected, setAnswerSelected] = useState<boolean>(false);
-  const [nextButtonIsDisabled, setNextButtonIsDisabled] =
-    useState<boolean>(true);
+function SingleQuestion({
+  questionInfo,
+  selectedAnswer,
+  setSelectedAnswer,
+  answerIsSubmitted,
+}: SingleQuestionProps) {
+  const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([]);
 
-  const possibleAnswersShuffled = shuffle([
-    ...questionInfo.incorrect_answers,
-    questionInfo.correct_answer,
-  ]);
+  useEffect(() => {
+    const shuffled = shuffle([
+      ...questionInfo.incorrect_answers,
+      questionInfo.correct_answer,
+    ]);
+    setShuffledAnswers(shuffled);
+  }, [questionInfo]);
 
-  function handleSelectAnAnswer() {
-    setAnswerSelected((prev) => !prev);
-  }
-
-  function handleSubmitAnswer() {
-    setNextButtonIsDisabled(false);
-  }
-
-  function handleNextQuestion() {
-    setCurrentQNo((prev) => prev + 1);
-    setAnswerSelected(false);
-    setNextButtonIsDisabled(true);
+  function handleSelectAnAnswer(idx: number) {
+    setSelectedAnswer(selectedAnswer === idx ? null : idx);
   }
 
   return (
     <>
       <h1>{questionInfo.question}</h1>
-      {possibleAnswersShuffled.map((ans, idx) => (
+      {shuffledAnswers.map((ans, idx) => (
         <Button
           key={idx}
-          onClick={handleSelectAnAnswer}
+          onClick={() => {
+            handleSelectAnAnswer(idx);
+          }}
           colorScheme="blue"
           variant="outline"
+          isDisabled={answerIsSubmitted}
         >
           {ans}
         </Button>
       ))}
       <hr />
-      <Button
-        isDisabled={!answerSelected}
-        onClick={handleSubmitAnswer}
-        colorScheme="blue"
-      >
-        Submit
-      </Button>
-      <Button
-        isDisabled={nextButtonIsDisabled}
-        onClick={handleNextQuestion}
-        colorScheme="blue"
-      >
-        Next
-      </Button>
     </>
   );
 }
