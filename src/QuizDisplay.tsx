@@ -39,23 +39,25 @@ function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
         setSelectedAnswer={setSelectedAnswer}
         answerIsSubmitted={answerIsSubmitted}
       ></SingleQuestion>
-      <Button
-        isDisabled={selectedAnswer == null || answerIsSubmitted === true}
-        onClick={handleSubmitAnswer}
-        colorScheme="blue"
-      >
-        Submit
-      </Button>
-      <Button
-        isDisabled={nextButtonIsDisabled}
-        onClick={handleClickNext}
-        colorScheme="blue"
-      >
-        Next
-      </Button>
-      <Button onClick={() => setQuizStarted(false)} colorScheme="blue">
-        Back to start
-      </Button>
+      <div className="action-btns">
+        <Button onClick={() => setQuizStarted(false)} colorScheme="blue">
+          Back to start
+        </Button>
+        <Button
+          isDisabled={selectedAnswer == null || answerIsSubmitted === true}
+          onClick={handleSubmitAnswer}
+          colorScheme="blue"
+        >
+          Submit
+        </Button>
+        <Button
+          isDisabled={nextButtonIsDisabled}
+          onClick={handleClickNext}
+          colorScheme="blue"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

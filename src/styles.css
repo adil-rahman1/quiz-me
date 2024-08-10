@@ -1,11 +1,23 @@
 .header {
-  margin-bottom: 3rem;
-  padding: 1rem;
+  margin: 2rem auto;
   text-align: center;
   font-size: 2rem;
 }
 
-.quiz-setup {
+.app {
   width: 60%;
   margin: auto auto;
+  padding-bottom: 30px;
+}
+
+.question {
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.action-btns {
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-evenly;
 }

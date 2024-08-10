@@ -22,7 +22,6 @@ import {
   ICategoryInfo,
   IQuestionInfo,
 } from "./types";
-import "./styles.css";
 import { Dispatch, SetStateAction } from "react";
 
 interface QuizSetupProps {
@@ -76,7 +75,7 @@ function QuizSetup({
   return (
     <>
       <FormControl>
-        <VStack className="quiz-setup" spacing="24px">
+        <VStack spacing="24px">
           <HStack>
             <FormLabel>Number of questions</FormLabel>
             <NumberInput

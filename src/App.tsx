@@ -3,6 +3,7 @@ import Header from "./Header";
 import QuizSetup from "./QuizSetup";
 import { ICategoryInfo, IQuestionInfo } from "./types";
 import QuizDisplay from "./QuizDisplay";
+import "./styles.css";
 
 function App() {
   const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
@@ -10,7 +11,7 @@ function App() {
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
 
   return (
-    <>
+    <div className="app">
       <Header></Header>
       {!quizStarted && (
         <QuizSetup
@@ -26,7 +27,7 @@ function App() {
           setQuizStarted={setQuizStarted}
         ></QuizDisplay>
       )}
-    </>
+    </div>
   );
 }
 
