@@ -16,7 +16,7 @@ function SingleQuestion({
   setSelectedAnswer,
   answerIsSubmitted,
 }: SingleQuestionProps) {
-  const [quizAnswers, setQuizAnswers] = useState<IAnswerInfo[]>([]);
+  const [answers, setAnswers] = useState<IAnswerInfo[]>([]);
 
   useEffect(() => {
     const allAnswers: string[] = [
@@ -24,7 +24,7 @@ function SingleQuestion({
       ...questionInfo.incorrect_answers,
     ];
 
-    const allAnswersWithInfo: IAnswerInfo[] = allAnswers.map(
+    const answersAsAnswerInfoList: IAnswerInfo[] = allAnswers.map(
       (answerText, idx) => {
         return {
           isCorrect: idx === 0 ? true : false,
@@ -34,18 +34,18 @@ function SingleQuestion({
     );
 
     // If quiz questions are of type true/false, then sort the array so True is always displayed before False
-    if (allAnswersWithInfo.length === 2) {
+    if (answersAsAnswerInfoList.length === 2) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      allAnswersWithInfo.sort((a, _b) => {
+      answersAsAnswerInfoList.sort((a, _b) => {
         if (a.text == "True") return -1;
         else return 1;
       });
     }
 
-    setQuizAnswers(
-      allAnswersWithInfo.length === 2
-        ? allAnswersWithInfo
-        : shuffle(allAnswersWithInfo)
+    setAnswers(
+      answersAsAnswerInfoList.length === 2
+        ? answersAsAnswerInfoList
+        : shuffle(answersAsAnswerInfoList)
     );
   }, [questionInfo]);
 
@@ -57,7 +57,7 @@ function SingleQuestion({
     <>
       <h1 className="question">{questionInfo.question}</h1>
       <SimpleGrid columns={2} spacing={10}>
-        {quizAnswers.map((ans, idx) => (
+        {answers.map((answer, idx) => (
           <Button
             key={idx}
             onClick={() => {
@@ -67,7 +67,7 @@ function SingleQuestion({
             variant={selectedAnswer === idx ? "solid" : "outline"}
             isDisabled={answerIsSubmitted}
           >
-            {ans.text}
+            {answer.text}
           </Button>
         ))}
       </SimpleGrid>
