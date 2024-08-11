@@ -1,7 +1,7 @@
 .header {
   margin: 2rem auto;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .app {
@@ -14,6 +14,7 @@
   text-align: center;
   padding: 15px;
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
 .action-btns {
