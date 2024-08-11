@@ -15,4 +15,15 @@ interface IQuestionInfo {
   incorrect_answers: string[];
 }
 
-export type { Difficulty, QuestionType, ICategoryInfo, IQuestionInfo };
+interface IAnswerInfo {
+  isCorrect: boolean;
+  text: string;
+}
+
+export type {
+  Difficulty,
+  QuestionType,
+  ICategoryInfo,
+  IQuestionInfo,
+  IAnswerInfo,
+};
