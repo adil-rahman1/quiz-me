@@ -40,8 +40,8 @@ function SingleQuestion({
             onClick={() => {
               handleSelectAnAnswer(idx);
             }}
-            colorScheme="blue"
-            variant="outline"
+            colorScheme={selectedAnswer === idx ? "blue" : "gray"}
+            variant={selectedAnswer === idx ? "solid" : "outline"}
             isDisabled={answerIsSubmitted}
           >
             {ans}
