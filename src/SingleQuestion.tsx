@@ -12,14 +12,14 @@ interface SingleQuestionProps {
   setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
 }
 
-function SingleQuestion({
+const SingleQuestion = ({
   questionInfo,
   selectedAnswer,
   setSelectedAnswer,
   answerIsSubmitted,
   allAnswers,
   setAllAnswers,
-}: SingleQuestionProps) {
+}: SingleQuestionProps) => {
   useEffect(() => {
     const answers: string[] = [
       questionInfo.correct_answer,
@@ -51,9 +51,9 @@ function SingleQuestion({
     );
   }, [questionInfo]);
 
-  function handleSelectAnAnswer(idx: number) {
+  const handleSelectAnAnswer = (idx: number) => {
     setSelectedAnswer(selectedAnswer === idx ? null : idx);
-  }
+  };
 
   return (
     <>
@@ -75,6 +75,6 @@ function SingleQuestion({
       </SimpleGrid>
     </>
   );
-}
+};
 
 export default SingleQuestion;

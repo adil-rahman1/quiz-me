@@ -8,7 +8,7 @@ interface QuizDisplayProps {
   setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
+const QuizDisplay = ({ allQuestions, setQuizStarted }: QuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
   const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
@@ -16,17 +16,17 @@ function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
     useState<boolean>(true);
   const [currentQNo, setCurrentQNo] = useState<number>(0);
 
-  function handleSubmitAnswer() {
+  const handleSubmitAnswer = () => {
     setAnswerIsSubmitted(true);
     setNextButtonIsDisabled(false);
-  }
+  };
 
-  function handleClickNext() {
+  const handleClickNext = () => {
     setCurrentQNo((prev) => prev + 1);
     setSelectedAnswer(null);
     setAnswerIsSubmitted(false);
     setNextButtonIsDisabled(true);
-  }
+  };
 
   const correctAnswer = allQuestions[currentQNo].correct_answer;
 
@@ -81,6 +81,6 @@ function QuizDisplay({ allQuestions, setQuizStarted }: QuizDisplayProps) {
       </div>
     </div>
   );
-}
+};
 
 export default QuizDisplay;

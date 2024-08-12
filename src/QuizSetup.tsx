@@ -31,12 +31,12 @@ interface QuizSetupProps {
   setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function QuizSetup({
+const QuizSetup = ({
   setAllQuestions,
   allCategories,
   setAllCategories,
   setQuizStarted,
-}: QuizSetupProps) {
+}: QuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
@@ -47,7 +47,7 @@ function QuizSetup({
     });
 
   useEffect(() => {
-    async function fetchAndStoreAllCategories() {
+    const fetchAndStoreAllCategories = async () => {
       try {
         const response = await axios.get(
           "https://opentdb.com/api_category.php"
@@ -56,11 +56,11 @@ function QuizSetup({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     fetchAndStoreAllCategories();
   }, []);
 
-  async function handleGenerateQuiz() {
+  const handleGenerateQuiz = async () => {
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
@@ -70,7 +70,7 @@ function QuizSetup({
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <>
@@ -163,6 +163,6 @@ function QuizSetup({
       </FormControl>
     </>
   );
-}
+};
 
 export default QuizSetup;

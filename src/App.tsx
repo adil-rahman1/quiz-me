@@ -5,7 +5,7 @@ import { ICategoryInfo, IQuestionInfo } from "./types";
 import QuizDisplay from "./QuizDisplay";
 import "./styles.css";
 
-function App() {
+const App = () => {
   const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
   const [quizStarted, setQuizStarted] = useState<boolean>(false);
@@ -29,6 +29,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
