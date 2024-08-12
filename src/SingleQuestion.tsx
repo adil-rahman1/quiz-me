@@ -1,13 +1,15 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import { IQuestionInfo, IAnswerInfo } from "./types";
 import shuffle from "./shuffleArray";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface SingleQuestionProps {
   questionInfo: IQuestionInfo;
   selectedAnswer: number | null;
   setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
   answerIsSubmitted: boolean;
+  allAnswers: IAnswerInfo[];
+  setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
 }
 
 function SingleQuestion({
@@ -15,16 +17,16 @@ function SingleQuestion({
   selectedAnswer,
   setSelectedAnswer,
   answerIsSubmitted,
+  allAnswers,
+  setAllAnswers,
 }: SingleQuestionProps) {
-  const [answers, setAnswers] = useState<IAnswerInfo[]>([]);
-
   useEffect(() => {
-    const allAnswers: string[] = [
+    const answers: string[] = [
       questionInfo.correct_answer,
       ...questionInfo.incorrect_answers,
     ];
 
-    const answersAsAnswerInfoList: IAnswerInfo[] = allAnswers.map(
+    const answersAsAnswerInfoList: IAnswerInfo[] = answers.map(
       (answerText, idx) => {
         return {
           isCorrect: idx === 0 ? true : false,
@@ -42,7 +44,7 @@ function SingleQuestion({
       });
     }
 
-    setAnswers(
+    setAllAnswers(
       answersAsAnswerInfoList.length === 2
         ? answersAsAnswerInfoList
         : shuffle(answersAsAnswerInfoList)
@@ -57,7 +59,7 @@ function SingleQuestion({
     <>
       <h1 className="question">{questionInfo.question}</h1>
       <SimpleGrid columns={2} spacing={10}>
-        {answers.map((answer, idx) => (
+        {allAnswers.map((answer, idx) => (
           <Button
             key={idx}
             onClick={() => {
