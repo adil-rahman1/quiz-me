@@ -21,7 +21,7 @@ import {
   QuestionType,
   ICategoryInfo,
   IQuestionInfo,
-} from "./types";
+} from "../types";
 import { Dispatch, SetStateAction } from "react";
 
 interface QuizSetupProps {

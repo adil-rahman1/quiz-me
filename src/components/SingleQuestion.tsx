@@ -1,6 +1,6 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
-import { IQuestionInfo, IAnswerInfo } from "./types";
-import shuffle from "./shuffleArray";
+import { IQuestionInfo, IAnswerInfo } from "../types";
+import shuffle from "../shuffleArray";
 import { useEffect } from "react";
 
 interface SingleQuestionProps {

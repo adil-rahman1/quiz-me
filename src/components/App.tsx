@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Header from "./Header";
 import QuizSetup from "./QuizSetup";
-import { ICategoryInfo, IQuestionInfo } from "./types";
+import { ICategoryInfo, IQuestionInfo } from "../types";
 import QuizDisplay from "./QuizDisplay";
-import "./styles.css";
+import "../styles.css";
 
 const App = () => {
   const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);

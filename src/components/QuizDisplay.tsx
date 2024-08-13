@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SingleQuestion from "./SingleQuestion";
-import { IAnswerInfo, IQuestionInfo } from "./types";
+import { IAnswerInfo, IQuestionInfo } from "../types";
 import { Button } from "@chakra-ui/react";
 
 interface QuizDisplayProps {
@@ -69,7 +69,7 @@ const QuizDisplay = ({ allQuestions, setQuizStarted }: QuizDisplayProps) => {
           Next
         </Button>
       </div>
-      <div>
+      <div className="feedback">
         {answerIsSubmitted &&
           allAnswers[selectedAnswer!].text == correctAnswer && (
             <p style={correctStyle}>{"That's correct"}</p>
