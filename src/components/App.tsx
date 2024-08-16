@@ -24,6 +24,7 @@ const App = () => {
       {quizStarted && (
         <QuizDisplay
           allQuestions={allQuestions}
+          quizStarted={quizStarted}
           setQuizStarted={setQuizStarted}
         ></QuizDisplay>
       )}

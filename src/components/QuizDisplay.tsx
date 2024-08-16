@@ -2,13 +2,19 @@ import { useState } from "react";
 import SingleQuestion from "./SingleQuestion";
 import { IAnswerInfo, IQuestionInfo } from "../types";
 import { Button } from "@chakra-ui/react";
+import ProgressDisplay from "./Progress";
 
 interface QuizDisplayProps {
   allQuestions: IQuestionInfo[];
+  quizStarted: boolean;
   setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const QuizDisplay = ({ allQuestions, setQuizStarted }: QuizDisplayProps) => {
+const QuizDisplay = ({
+  allQuestions,
+  quizStarted,
+  setQuizStarted,
+}: QuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
   const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
@@ -29,6 +35,7 @@ const QuizDisplay = ({ allQuestions, setQuizStarted }: QuizDisplayProps) => {
   };
 
   const correctAnswer = allQuestions[currentQNo].correct_answer;
+  const progress = (currentQNo * 100) / allQuestions.length;
 
   const correctStyle = {
     color: "green",
@@ -42,6 +49,7 @@ const QuizDisplay = ({ allQuestions, setQuizStarted }: QuizDisplayProps) => {
 
   return (
     <div>
+      {quizStarted && <ProgressDisplay progress={progress}></ProgressDisplay>}
       <SingleQuestion
         questionInfo={allQuestions[currentQNo]}
         selectedAnswer={selectedAnswer}
