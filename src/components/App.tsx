@@ -1,31 +1,28 @@
 import { useState } from "react";
 import Header from "./Header";
 import QuizSetup from "./QuizSetup";
-import { ICategoryInfo, IQuestionInfo } from "../types";
+import { QuizStatusType, IQuestionInfo } from "../types";
 import QuizDisplay from "./QuizDisplay";
 import "../styles.css";
 
 const App = () => {
   const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
-  const [quizStarted, setQuizStarted] = useState<boolean>(false);
+  const [quizStatus, setQuizStatus] = useState<QuizStatusType>("notStarted");
 
   return (
     <div className="app">
       <Header></Header>
-      {!quizStarted && (
+      {quizStatus === "notStarted" && (
         <QuizSetup
           setAllQuestions={setAllQuestions}
-          allCategories={allCategories}
-          setAllCategories={setAllCategories}
-          setQuizStarted={setQuizStarted}
+          setQuizStatus={setQuizStatus}
         ></QuizSetup>
       )}
-      {quizStarted && (
+      {quizStatus !== "notStarted" && (
         <QuizDisplay
           allQuestions={allQuestions}
-          quizStarted={quizStarted}
-          setQuizStarted={setQuizStarted}
+          quizStatus={quizStatus}
+          setQuizStatus={setQuizStatus}
         ></QuizDisplay>
       )}
     </div>
