@@ -7,7 +7,7 @@ const Report = ({ correctAnswers, totalQuestions }: ReportProps) => {
   const scoreAsPercentage = Math.floor((correctAnswers * 100) / totalQuestions);
   return (
     <>
-      <p>
+      <p className="report">
         You scored {scoreAsPercentage}% ({correctAnswers}/{totalQuestions})
       </p>
     </>
