@@ -1,5 +1,6 @@
-type Difficulty = "easy" | "medium" | "hard";
+type DifficultyType = "easy" | "medium" | "hard";
 type QuestionType = "multiple" | "boolean";
+type QuizStatusType = "notStarted" | "inProgress" | "completed";
 
 interface ICategoryInfo {
   id: number;
@@ -8,7 +9,7 @@ interface ICategoryInfo {
 
 interface IQuestionInfo {
   type: QuestionType;
-  difficulty: Difficulty;
+  difficulty: DifficultyType;
   category: string;
   question: string;
   correct_answer: string;
@@ -21,8 +22,9 @@ interface IAnswerInfo {
 }
 
 export type {
-  Difficulty,
+  DifficultyType,
   QuestionType,
+  QuizStatusType,
   ICategoryInfo,
   IQuestionInfo,
   IAnswerInfo,
