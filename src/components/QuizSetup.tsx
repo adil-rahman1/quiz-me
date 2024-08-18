@@ -17,37 +17,32 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {
-  Difficulty,
+  DifficultyType,
   QuestionType,
+  QuizStatusType,
   ICategoryInfo,
   IQuestionInfo,
-} from "./types";
+} from "../types";
 import { Dispatch, SetStateAction } from "react";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
-  allCategories: ICategoryInfo[];
-  setAllCategories: Dispatch<SetStateAction<ICategoryInfo[]>>;
-  setQuizStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
 }
 
-function QuizSetup({
-  setAllQuestions,
-  allCategories,
-  setAllCategories,
-  setQuizStarted,
-}: QuizSetupProps) {
+const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
-  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [difficulty, setDifficulty] = useState<DifficultyType>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
     useState<ICategoryInfo>({
       id: -1,
       name: "",
     });
+  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {
-    async function fetchAndStoreAllCategories() {
+    const fetchAndStoreAllCategories = async () => {
       try {
         const response = await axios.get(
           "https://opentdb.com/api_category.php"
@@ -56,21 +51,21 @@ function QuizSetup({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     fetchAndStoreAllCategories();
   }, []);
 
-  async function handleGenerateQuiz() {
+  const handleGenerateQuiz = async () => {
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
       setAllQuestions(response.data.results);
-      setQuizStarted(true);
+      setQuizStatus("inProgress");
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <>
@@ -101,7 +96,7 @@ function QuizSetup({
 
             <RadioGroup
               onChange={(nextVal: string) =>
-                setDifficulty(nextVal as Difficulty)
+                setDifficulty(nextVal as DifficultyType)
               }
               value={difficulty}
             >
@@ -163,6 +158,6 @@ function QuizSetup({
       </FormControl>
     </>
   );
-}
+};
 
 export default QuizSetup;

@@ -23,7 +23,8 @@
   justify-content: space-evenly;
 }
 
-.feedback {
+.feedback,
+.report {
   text-align: center;
   padding: 15px;
   font-size: 1.5rem;
