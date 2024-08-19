@@ -1,9 +1,4 @@
 import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Radio,
   RadioGroup,
   Stack,
@@ -23,6 +18,7 @@ import {
 } from "../types";
 import { Dispatch, SetStateAction } from "react";
 import SelectComponent from "./SelectComponent";
+import NumberInput from "./NumberInput";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -61,26 +57,11 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
     <>
       <FormControl>
         <VStack spacing="24px">
-          <HStack>
-            <FormLabel>Number of questions</FormLabel>
-            <NumberInput
-              size="lg"
-              maxW={32}
-              defaultValue={numberOfQuestions}
-              min={10}
-              max={50}
-              step={5}
-              onChange={(_stringVal: string, numVal: number) => {
-                setNumberOfQuestions(numVal);
-              }}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </HStack>
+          <NumberInput
+            numberOfQuestions={numberOfQuestions}
+            setNumberOfQuestions={setNumberOfQuestions}
+          ></NumberInput>
+
           <HStack>
             <FormLabel>Select difficulty</FormLabel>
 
