@@ -60,8 +60,14 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
-      setAllQuestions(response.data.results);
-      setQuizStatus("inProgress");
+      switch (response.data.response_code) {
+        case 0:
+          setAllQuestions(response.data.results);
+          setQuizStatus("inProgress");
+          break;
+        case 1:
+          alert("There are not enough questions for your query");
+      }
     } catch (error) {
       console.error(error);
     }
