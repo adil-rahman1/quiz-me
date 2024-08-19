@@ -19,6 +19,7 @@ import {
 import { Dispatch, SetStateAction } from "react";
 import SelectComponent from "./SelectComponent";
 import NumberInput from "./NumberInput";
+import DifficultyRadioInput from "./DifficultyRadioInput";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -62,22 +63,9 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
             setNumberOfQuestions={setNumberOfQuestions}
           ></NumberInput>
 
-          <HStack>
-            <FormLabel>Select difficulty</FormLabel>
-
-            <RadioGroup
-              onChange={(nextVal: string) =>
-                setDifficulty(nextVal as DifficultyType)
-              }
-              value={difficulty}
-            >
-              <Stack direction="row">
-                <Radio value="easy">Easy</Radio>
-                <Radio value="medium">Medium</Radio>
-                <Radio value="hard">Hard</Radio>
-              </Stack>
-            </RadioGroup>
-          </HStack>
+          <DifficultyRadioInput
+            setDifficulty={setDifficulty}
+          ></DifficultyRadioInput>
 
           <HStack>
             <FormLabel>Select question type</FormLabel>
