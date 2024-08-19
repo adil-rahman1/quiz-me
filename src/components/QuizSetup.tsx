@@ -7,15 +7,13 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Select,
-  Button,
   VStack,
   FormControl,
   FormLabel,
   HStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   DifficultyType,
   QuestionType,
@@ -24,6 +22,7 @@ import {
   IQuestionInfo,
 } from "../types";
 import { Dispatch, SetStateAction } from "react";
+import SelectComponent from "./SelectComponent";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -36,24 +35,9 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
     useState<ICategoryInfo>({
-      id: -1,
-      name: "",
+      id: 9,
+      name: "General Knowledge",
     });
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
-
-  useEffect(() => {
-    const fetchAndStoreAllCategories = async () => {
-      try {
-        const response = await axios.get(
-          "https://opentdb.com/api_category.php"
-        );
-        setAllCategories(response.data.trivia_categories);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchAndStoreAllCategories();
-  }, []);
 
   const handleGenerateQuiz = async () => {
     try {
@@ -130,36 +114,16 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
             </RadioGroup>
           </HStack>
 
-          <HStack>
-            <FormLabel>Select category</FormLabel>
+          <SelectComponent
+            setSelectedCategoryInfo={setSelectedCategoryInfo}
+          ></SelectComponent>
 
-            <Select
-              size="md"
-              onChange={(e) => {
-                const categoryInfo: ICategoryInfo = allCategories.filter(
-                  (catInfo: ICategoryInfo) => catInfo.name === e.target.value
-                )[0];
-                setSelectedCategoryInfo({
-                  id: categoryInfo.id,
-                  name: categoryInfo.name,
-                });
-              }}
-              placeholder="Category"
-            >
-              {allCategories.map((data) => (
-                <option key={data.id} value={data.name}>
-                  {data.name}
-                </option>
-              ))}
-            </Select>
-          </HStack>
-          <Button
+          <button
             onClick={handleGenerateQuiz}
-            colorScheme="blue"
-            isDisabled={selectedCategoryInfo.name === "" ? true : false}
+            disabled={selectedCategoryInfo.name === "" ? true : false}
           >
             Begin
-          </Button>
+          </button>
         </VStack>
       </FormControl>
     </>
