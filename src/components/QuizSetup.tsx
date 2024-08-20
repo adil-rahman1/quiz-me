@@ -48,31 +48,29 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
 
   return (
     <>
-      <form>
-        <NumberInput
-          numberOfQuestions={numberOfQuestions}
-          setNumberOfQuestions={setNumberOfQuestions}
-        ></NumberInput>
+      <NumberInput
+        numberOfQuestions={numberOfQuestions}
+        setNumberOfQuestions={setNumberOfQuestions}
+      ></NumberInput>
 
-        <DifficultyRadioInput
-          setDifficulty={setDifficulty}
-        ></DifficultyRadioInput>
+      <DifficultyRadioInput
+        setDifficulty={setDifficulty}
+      ></DifficultyRadioInput>
 
-        <QuestionTypeRadioInput
-          setQuestionType={setQuestionType}
-        ></QuestionTypeRadioInput>
+      <QuestionTypeRadioInput
+        setQuestionType={setQuestionType}
+      ></QuestionTypeRadioInput>
 
-        <CategoryInput
-          setSelectedCategoryInfo={setSelectedCategoryInfo}
-        ></CategoryInput>
+      <CategoryInput
+        setSelectedCategoryInfo={setSelectedCategoryInfo}
+      ></CategoryInput>
 
-        <button
-          onClick={handleGenerateQuiz}
-          disabled={selectedCategoryInfo.name === "" ? true : false}
-        >
-          Begin
-        </button>
-      </form>
+      <button
+        onClick={handleGenerateQuiz}
+        disabled={selectedCategoryInfo.name === "" ? true : false}
+      >
+        Begin
+      </button>
     </>
   );
 };
