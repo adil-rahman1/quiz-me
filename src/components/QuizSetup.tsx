@@ -1,4 +1,3 @@
-import { VStack, FormControl } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import {
@@ -9,10 +8,10 @@ import {
   IQuestionInfo,
 } from "../types";
 import { Dispatch, SetStateAction } from "react";
-import SelectComponent from "./SelectComponent";
 import NumberInput from "./NumberInput";
 import DifficultyRadioInput from "./DifficultyRadioInput";
 import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
+import CategoryInput from "./CategoryInput";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -49,33 +48,31 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
 
   return (
     <>
-      <FormControl>
-        <VStack spacing="24px">
-          <NumberInput
-            numberOfQuestions={numberOfQuestions}
-            setNumberOfQuestions={setNumberOfQuestions}
-          ></NumberInput>
+      <form>
+        <NumberInput
+          numberOfQuestions={numberOfQuestions}
+          setNumberOfQuestions={setNumberOfQuestions}
+        ></NumberInput>
 
-          <DifficultyRadioInput
-            setDifficulty={setDifficulty}
-          ></DifficultyRadioInput>
+        <DifficultyRadioInput
+          setDifficulty={setDifficulty}
+        ></DifficultyRadioInput>
 
-          <QuestionTypeRadioInput
-            setQuestionType={setQuestionType}
-          ></QuestionTypeRadioInput>
+        <QuestionTypeRadioInput
+          setQuestionType={setQuestionType}
+        ></QuestionTypeRadioInput>
 
-          <SelectComponent
-            setSelectedCategoryInfo={setSelectedCategoryInfo}
-          ></SelectComponent>
+        <CategoryInput
+          setSelectedCategoryInfo={setSelectedCategoryInfo}
+        ></CategoryInput>
 
-          <button
-            onClick={handleGenerateQuiz}
-            disabled={selectedCategoryInfo.name === "" ? true : false}
-          >
-            Begin
-          </button>
-        </VStack>
-      </FormControl>
+        <button
+          onClick={handleGenerateQuiz}
+          disabled={selectedCategoryInfo.name === "" ? true : false}
+        >
+          Begin
+        </button>
+      </form>
     </>
   );
 };

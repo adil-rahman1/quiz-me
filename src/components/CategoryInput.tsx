@@ -2,11 +2,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ICategoryInfo } from "../types";
 import axios from "axios";
 
-interface SelectComponentProps {
+interface CategoryInputProps {
   setSelectedCategoryInfo: Dispatch<SetStateAction<ICategoryInfo>>;
 }
 
-const SelectComponent = ({ setSelectedCategoryInfo }: SelectComponentProps) => {
+const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {
@@ -49,4 +49,4 @@ const SelectComponent = ({ setSelectedCategoryInfo }: SelectComponentProps) => {
   );
 };
 
-export default SelectComponent;
+export default CategoryInput;
