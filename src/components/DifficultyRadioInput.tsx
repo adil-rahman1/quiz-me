@@ -28,7 +28,7 @@ const DifficultyRadioInput = ({ setDifficulty }: DifficultyRadioInputProps) => {
         <input
           type="radio"
           name="difficulty"
-          id="easy"
+          id="medium"
           value="medium"
           onChange={(e) => onDifficultyChange(e.target.value)}
         />
@@ -38,7 +38,7 @@ const DifficultyRadioInput = ({ setDifficulty }: DifficultyRadioInputProps) => {
         <input
           type="radio"
           name="difficulty"
-          id="easy"
+          id="hard"
           value="hard"
           onChange={(e) => onDifficultyChange(e.target.value)}
         />
