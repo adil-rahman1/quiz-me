@@ -13,31 +13,29 @@ const QuestionTypeRadioInput = ({
   };
 
   return (
-    <form>
-      <fieldset>
-        <legend>Select difficulty</legend>
+    <fieldset>
+      <legend>Select difficulty</legend>
 
-        <input
-          type="radio"
-          name="difficulty"
-          id="multiple"
-          value="multiple"
-          onChange={(e) => onQuestionTypeChange(e.target.value)}
-        />
-        <label htmlFor="multiple">Multiple</label>
-        <br />
+      <input
+        type="radio"
+        name="questionType"
+        id="multiple"
+        value="multiple"
+        onChange={(e) => onQuestionTypeChange(e.target.value)}
+      />
+      <label htmlFor="multiple">Multiple</label>
+      <br />
 
-        <input
-          type="radio"
-          name="difficulty"
-          id="boolean"
-          value="boolean"
-          onChange={(e) => onQuestionTypeChange(e.target.value)}
-        />
-        <label htmlFor="boolean">True or False</label>
-        <br />
-      </fieldset>
-    </form>
+      <input
+        type="radio"
+        name="questionType"
+        id="boolean"
+        value="boolean"
+        onChange={(e) => onQuestionTypeChange(e.target.value)}
+      />
+      <label htmlFor="boolean">True or False</label>
+      <br />
+    </fieldset>
   );
 };
 

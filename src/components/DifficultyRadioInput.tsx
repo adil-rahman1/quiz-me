@@ -11,40 +11,38 @@ const DifficultyRadioInput = ({ setDifficulty }: DifficultyRadioInputProps) => {
   };
 
   return (
-    <form>
-      <fieldset>
-        <legend>Select difficulty</legend>
+    <fieldset>
+      <legend>Select difficulty</legend>
 
-        <input
-          type="radio"
-          name="difficulty"
-          id="easy"
-          value="easy"
-          onChange={(e) => onDifficultyChange(e.target.value)}
-        />
-        <label htmlFor="easy">Easy</label>
-        <br />
+      <input
+        type="radio"
+        name="difficulty"
+        id="easy"
+        value="easy"
+        onChange={(e) => onDifficultyChange(e.target.value)}
+      />
+      <label htmlFor="easy">Easy</label>
+      <br />
 
-        <input
-          type="radio"
-          name="difficulty"
-          id="medium"
-          value="medium"
-          onChange={(e) => onDifficultyChange(e.target.value)}
-        />
-        <label htmlFor="medium">Medium</label>
-        <br />
+      <input
+        type="radio"
+        name="difficulty"
+        id="medium"
+        value="medium"
+        onChange={(e) => onDifficultyChange(e.target.value)}
+      />
+      <label htmlFor="medium">Medium</label>
+      <br />
 
-        <input
-          type="radio"
-          name="difficulty"
-          id="hard"
-          value="hard"
-          onChange={(e) => onDifficultyChange(e.target.value)}
-        />
-        <label htmlFor="hard">Hard</label>
-      </fieldset>
-    </form>
+      <input
+        type="radio"
+        name="difficulty"
+        id="hard"
+        value="hard"
+        onChange={(e) => onDifficultyChange(e.target.value)}
+      />
+      <label htmlFor="hard">Hard</label>
+    </fieldset>
   );
 };
 
