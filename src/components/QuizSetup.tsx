@@ -1,12 +1,4 @@
-import {
-  Radio,
-  RadioGroup,
-  Stack,
-  VStack,
-  FormControl,
-  FormLabel,
-  HStack,
-} from "@chakra-ui/react";
+import { VStack, FormControl } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import {
@@ -20,6 +12,7 @@ import { Dispatch, SetStateAction } from "react";
 import SelectComponent from "./SelectComponent";
 import NumberInput from "./NumberInput";
 import DifficultyRadioInput from "./DifficultyRadioInput";
+import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -67,21 +60,9 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
             setDifficulty={setDifficulty}
           ></DifficultyRadioInput>
 
-          <HStack>
-            <FormLabel>Select question type</FormLabel>
-
-            <RadioGroup
-              onChange={(nextVal: string) =>
-                setQuestionType(nextVal as QuestionType)
-              }
-              value={questionType}
-            >
-              <Stack direction="row">
-                <Radio value="multiple">Multiple Choice</Radio>
-                <Radio value="boolean">True or False</Radio>
-              </Stack>
-            </RadioGroup>
-          </HStack>
+          <QuestionTypeRadioInput
+            setQuestionType={setQuestionType}
+          ></QuestionTypeRadioInput>
 
           <SelectComponent
             setSelectedCategoryInfo={setSelectedCategoryInfo}
