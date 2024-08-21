@@ -24,10 +24,11 @@ const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
   }, []);
 
   return (
-    <div>
+    <div className="select-container">
       <label htmlFor="category">Select category</label>
 
       <select
+        className="select-input"
         id="category"
         onChange={(e) => {
           const categoryInfo: ICategoryInfo = allCategories.filter(

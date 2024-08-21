@@ -66,6 +66,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
       ></CategoryInput>
 
       <button
+        className="begin-btn"
         onClick={handleGenerateQuiz}
         disabled={selectedCategoryInfo.name === "" ? true : false}
       >

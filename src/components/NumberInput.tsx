@@ -10,9 +10,10 @@ const NumberInput = ({
   setNumberOfQuestions,
 }: NumberInputProps) => {
   return (
-    <div>
+    <div className="number-input-container">
       <label htmlFor="numberOfQuestions">Number of questions</label>
       <input
+        className="number-input"
         id="numberOfQuestions"
         type="number"
         defaultValue={numberOfQuestions}
