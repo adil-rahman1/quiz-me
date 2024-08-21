@@ -62,7 +62,6 @@ const QuizDisplay = ({
     <div>
       {quizStatus === "inProgress" && (
         <>
-          <ProgressDisplay progress={progress}></ProgressDisplay>
           <SingleQuestion
             questionInfo={allQuestions[currentQNo]}
             selectedAnswer={selectedAnswer}
@@ -70,6 +69,8 @@ const QuizDisplay = ({
             answerIsSubmitted={answerIsSubmitted}
             allAnswers={allAnswers}
             setAllAnswers={setAllAnswers}
+            currentQNo={currentQNo}
+            totalQuestions={allQuestions.length}
           ></SingleQuestion>
           <div className="action-btns">
             <Button

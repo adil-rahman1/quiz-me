@@ -56,11 +56,17 @@ body {
   background-color: #c3a543;
 }
 
-.question {
+.progress,
+.question-text {
   text-align: center;
-  padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 1.5rem;
+}
+
+.question-number {
+  font-size: 1.8rem;
+  font-weight: 550;
+  font-style: italic;
 }
 
 .action-btns {
