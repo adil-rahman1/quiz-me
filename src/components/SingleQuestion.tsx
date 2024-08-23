@@ -71,7 +71,9 @@ const SingleQuestion = ({
         {allAnswers.map((answer, idx) => (
           <button
             className={
-              selectedAnswer === idx ? "selected-answer" : "answer-btn"
+              selectedAnswer === idx
+                ? "answer-btn selected-answer-btn"
+                : "answer-btn"
             }
             type="button"
             key={idx}

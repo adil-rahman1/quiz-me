@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import SingleQuestion from "./SingleQuestion";
 import { IAnswerInfo, IQuestionInfo, QuizStatusType } from "../types";
-import { Button } from "@chakra-ui/react";
-import ProgressDisplay from "./Progress";
 import Report from "./Report";
 
 interface QuizDisplayProps {
@@ -46,7 +44,6 @@ const QuizDisplay = ({
   const correctAnswer = quizStatus
     ? allQuestions[currentQNo].correct_answer
     : null;
-  const progress = (currentQNo * 100) / allQuestions.length;
 
   const correctStyle = {
     color: "green",
@@ -73,26 +70,26 @@ const QuizDisplay = ({
             totalQuestions={allQuestions.length}
           ></SingleQuestion>
           <div className="action-btns">
-            <Button
+            <button
+              className="back-to-start-btn"
               onClick={() => setQuizStatus("notStarted")}
-              colorScheme="blue"
             >
               Back to start
-            </Button>
-            <Button
-              isDisabled={selectedAnswer == null || answerIsSubmitted === true}
+            </button>
+            <button
+              className="submit-btn"
+              disabled={selectedAnswer == null || answerIsSubmitted === true}
               onClick={handleSubmitAnswer}
-              colorScheme="blue"
             >
               Submit
-            </Button>
-            <Button
-              isDisabled={nextButtonIsDisabled}
+            </button>
+            <button
+              className="next-btn"
+              disabled={nextButtonIsDisabled}
               onClick={handleClickNext}
-              colorScheme="blue"
             >
               Next
-            </Button>
+            </button>
           </div>
           <div className="feedback">
             {answerIsSubmitted &&
