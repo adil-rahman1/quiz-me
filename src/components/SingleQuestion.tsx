@@ -1,4 +1,3 @@
-import { Button, SimpleGrid } from "@chakra-ui/react";
 import { IQuestionInfo, IAnswerInfo } from "../types";
 import shuffle from "../shuffleArray";
 import { useEffect } from "react";
@@ -10,6 +9,8 @@ interface SingleQuestionProps {
   answerIsSubmitted: boolean;
   allAnswers: IAnswerInfo[];
   setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
+  currentQNo: number;
+  totalQuestions: number;
 }
 
 const SingleQuestion = ({
@@ -19,6 +20,8 @@ const SingleQuestion = ({
   answerIsSubmitted,
   allAnswers,
   setAllAnswers,
+  currentQNo,
+  totalQuestions,
 }: SingleQuestionProps) => {
   useEffect(() => {
     const answers: string[] = [
@@ -57,22 +60,32 @@ const SingleQuestion = ({
 
   return (
     <>
-      <h1 className="question">{questionInfo.question}</h1>
-      <SimpleGrid columns={2} spacing={10}>
+      <div>
+        <h1 className="progress">
+          Question <span className="question-number">{currentQNo + 1}</span>/
+          {totalQuestions}
+        </h1>
+        <p className="question-text">{questionInfo.question}</p>
+      </div>
+      <div className="answer-grid">
         {allAnswers.map((answer, idx) => (
-          <Button
+          <button
+            className={
+              selectedAnswer === idx
+                ? "answer-btn selected-answer-btn"
+                : "answer-btn"
+            }
+            type="button"
             key={idx}
             onClick={() => {
               handleSelectAnAnswer(idx);
             }}
-            colorScheme={selectedAnswer === idx ? "blue" : "gray"}
-            variant={selectedAnswer === idx ? "solid" : "outline"}
-            isDisabled={answerIsSubmitted}
+            disabled={answerIsSubmitted}
           >
             {answer.text}
-          </Button>
+          </button>
         ))}
-      </SimpleGrid>
+      </div>
     </>
   );
 };

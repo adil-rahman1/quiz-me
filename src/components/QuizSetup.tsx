@@ -1,21 +1,5 @@
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Radio,
-  RadioGroup,
-  Stack,
-  Select,
-  Button,
-  VStack,
-  FormControl,
-  FormLabel,
-  HStack,
-} from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   DifficultyType,
   QuestionType,
@@ -24,6 +8,10 @@ import {
   IQuestionInfo,
 } from "../types";
 import { Dispatch, SetStateAction } from "react";
+import NumberInput from "./NumberInput";
+import DifficultyRadioInput from "./DifficultyRadioInput";
+import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
+import CategoryInput from "./CategoryInput";
 
 interface QuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
@@ -36,32 +24,23 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
     useState<ICategoryInfo>({
-      id: -1,
-      name: "",
+      id: 9,
+      name: "General Knowledge",
     });
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
-
-  useEffect(() => {
-    const fetchAndStoreAllCategories = async () => {
-      try {
-        const response = await axios.get(
-          "https://opentdb.com/api_category.php"
-        );
-        setAllCategories(response.data.trivia_categories);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchAndStoreAllCategories();
-  }, []);
 
   const handleGenerateQuiz = async () => {
     try {
       const response = await axios.get(
         `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
       );
-      setAllQuestions(response.data.results);
-      setQuizStatus("inProgress");
+      switch (response.data.response_code) {
+        case 0:
+          setAllQuestions(response.data.results);
+          setQuizStatus("inProgress");
+          break;
+        case 1:
+          alert("There are not enough questions for your query");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -69,93 +48,30 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
 
   return (
     <>
-      <FormControl>
-        <VStack spacing="24px">
-          <HStack>
-            <FormLabel>Number of questions</FormLabel>
-            <NumberInput
-              size="lg"
-              maxW={32}
-              defaultValue={numberOfQuestions}
-              min={10}
-              max={50}
-              step={5}
-              onChange={(_stringVal: string, numVal: number) => {
-                setNumberOfQuestions(numVal);
-              }}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </HStack>
-          <HStack>
-            <FormLabel>Select difficulty</FormLabel>
+      <NumberInput
+        numberOfQuestions={numberOfQuestions}
+        setNumberOfQuestions={setNumberOfQuestions}
+      ></NumberInput>
 
-            <RadioGroup
-              onChange={(nextVal: string) =>
-                setDifficulty(nextVal as DifficultyType)
-              }
-              value={difficulty}
-            >
-              <Stack direction="row">
-                <Radio value="easy">Easy</Radio>
-                <Radio value="medium">Medium</Radio>
-                <Radio value="hard">Hard</Radio>
-              </Stack>
-            </RadioGroup>
-          </HStack>
+      <DifficultyRadioInput
+        setDifficulty={setDifficulty}
+      ></DifficultyRadioInput>
 
-          <HStack>
-            <FormLabel>Select question type</FormLabel>
+      <QuestionTypeRadioInput
+        setQuestionType={setQuestionType}
+      ></QuestionTypeRadioInput>
 
-            <RadioGroup
-              onChange={(nextVal: string) =>
-                setQuestionType(nextVal as QuestionType)
-              }
-              value={questionType}
-            >
-              <Stack direction="row">
-                <Radio value="multiple">Multiple Choice</Radio>
-                <Radio value="boolean">True or False</Radio>
-              </Stack>
-            </RadioGroup>
-          </HStack>
+      <CategoryInput
+        setSelectedCategoryInfo={setSelectedCategoryInfo}
+      ></CategoryInput>
 
-          <HStack>
-            <FormLabel>Select category</FormLabel>
-
-            <Select
-              size="md"
-              onChange={(e) => {
-                const categoryInfo: ICategoryInfo = allCategories.filter(
-                  (catInfo: ICategoryInfo) => catInfo.name === e.target.value
-                )[0];
-                setSelectedCategoryInfo({
-                  id: categoryInfo.id,
-                  name: categoryInfo.name,
-                });
-              }}
-              placeholder="Category"
-            >
-              {allCategories.map((data) => (
-                <option key={data.id} value={data.name}>
-                  {data.name}
-                </option>
-              ))}
-            </Select>
-          </HStack>
-          <Button
-            onClick={handleGenerateQuiz}
-            colorScheme="blue"
-            isDisabled={selectedCategoryInfo.name === "" ? true : false}
-          >
-            Begin
-          </Button>
-        </VStack>
-      </FormControl>
+      <button
+        className="begin-btn"
+        onClick={handleGenerateQuiz}
+        disabled={selectedCategoryInfo.name === "" ? true : false}
+      >
+        Begin
+      </button>
     </>
   );
 };
