@@ -1,4 +1,3 @@
-import { Button, SimpleGrid } from "@chakra-ui/react";
 import { IQuestionInfo, IAnswerInfo } from "../types";
 import shuffle from "../shuffleArray";
 import { useEffect } from "react";
@@ -68,21 +67,23 @@ const SingleQuestion = ({
         </h1>
         <p className="question-text">{questionInfo.question}</p>
       </div>
-      <SimpleGrid columns={2} spacing={10}>
+      <div className="answer-grid">
         {allAnswers.map((answer, idx) => (
-          <Button
+          <button
+            className={
+              selectedAnswer === idx ? "selected-answer" : "answer-btn"
+            }
+            type="button"
             key={idx}
             onClick={() => {
               handleSelectAnAnswer(idx);
             }}
-            colorScheme={selectedAnswer === idx ? "blue" : "gray"}
-            variant={selectedAnswer === idx ? "solid" : "outline"}
-            isDisabled={answerIsSubmitted}
+            disabled={answerIsSubmitted}
           >
             {answer.text}
-          </Button>
+          </button>
         ))}
-      </SimpleGrid>
+      </div>
     </>
   );
 };

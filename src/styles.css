@@ -1,3 +1,8 @@
+:root {
+  --gold-colour: #ecd078;
+  --dark-gold-colour: #c3a543;
+}
+
 * {
   font-family: "Courier New", Courier, monospace;
 }
@@ -38,7 +43,7 @@ body {
 .select-input,
 .begin-btn {
   width: 60%;
-  background-color: #ecd078;
+  background-color: var(--gold-colour);
   border-radius: 8px;
   padding: 10px;
 }
@@ -53,7 +58,7 @@ body {
 }
 
 .begin-btn:hover {
-  background-color: #c3a543;
+  background-color: var(--gold-colour);
 }
 
 .progress,
@@ -67,6 +72,30 @@ body {
   font-size: 1.8rem;
   font-weight: 550;
   font-style: italic;
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.answer-btn,
+.selected-answer {
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 550;
+  padding: 5px;
+  color: black;
+}
+
+.answer-btn {
+  background-color: #e1ded2;
+}
+
+.answer-btn:hover,
+.selected-answer {
+  background-color: var(--gold-colour);
 }
 
 .action-btns {
