@@ -19,11 +19,12 @@ body {
   background-color: #9cc4e4;
   padding: 24px;
   border-radius: 8px;
+  width: 600px;
+  height: 420px;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 20px;
   font-size: 2.5rem;
 }
 
@@ -37,6 +38,7 @@ body {
   margin-bottom: 10px;
   font-size: 1.2rem;
   font-weight: 500;
+  padding: 8px 0;
 }
 
 .number-input,
@@ -46,6 +48,11 @@ body {
   background-color: var(--gold-colour);
   border-radius: 8px;
   padding: 10px;
+  border-width: 0;
+}
+
+fieldset {
+  border-width: 0;
 }
 
 .radio-group {
@@ -86,6 +93,12 @@ body {
 .next-btn {
   border-radius: 8px;
   padding: 8px;
+}
+
+.back-to-start-btn,
+.submit-btn,
+.next-btn {
+  border-width: 0;
 }
 
 .answer-btn {
