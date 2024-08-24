@@ -23,6 +23,23 @@ const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
     fetchAndStoreAllCategories();
   }, []);
 
+  const handleChangeCategory = (categoryName: string) => {
+    if (categoryName === "none") {
+      setSelectedCategoryInfo({
+        id: -1,
+        name: "",
+      });
+    } else {
+      const categoryInfo: ICategoryInfo = allCategories.filter(
+        (catInfo: ICategoryInfo) => catInfo.name === categoryName
+      )[0];
+      setSelectedCategoryInfo({
+        id: categoryInfo.id,
+        name: categoryInfo.name,
+      });
+    }
+  };
+
   return (
     <div className="select-container">
       <label htmlFor="category">Select category</label>
@@ -30,16 +47,9 @@ const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
       <select
         className="select-input"
         id="category"
-        onChange={(e) => {
-          const categoryInfo: ICategoryInfo = allCategories.filter(
-            (catInfo: ICategoryInfo) => catInfo.name === e.target.value
-          )[0];
-          setSelectedCategoryInfo({
-            id: categoryInfo.id,
-            name: categoryInfo.name,
-          });
-        }}
+        onChange={(e) => handleChangeCategory(e.target.value)}
       >
+        <option value="none">Choose a category</option>
         {allCategories.map((data) => (
           <option key={data.id} value={data.name}>
             {data.name}

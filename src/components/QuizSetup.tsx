@@ -24,8 +24,8 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
     useState<ICategoryInfo>({
-      id: 9,
-      name: "General Knowledge",
+      id: -1,
+      name: "",
     });
 
   const handleGenerateQuiz = async () => {
