@@ -1,6 +1,7 @@
 import { IQuestionInfo, IAnswerInfo } from "../types";
 import shuffle from "../shuffleArray";
 import { useEffect } from "react";
+import decodeHtml from "../decodeHtml";
 
 interface SingleQuestionProps {
   questionInfo: IQuestionInfo;
@@ -65,7 +66,7 @@ const SingleQuestion = ({
           Question <span className="question-number">{currentQNo + 1}</span>/
           {totalQuestions}
         </h1>
-        <p className="question-text">{questionInfo.question}</p>
+        <p className="question-text">{decodeHtml(questionInfo.question)}</p>
       </div>
       <div className="answer-grid">
         {allAnswers.map((answer, idx) => (
@@ -82,7 +83,7 @@ const SingleQuestion = ({
             }}
             disabled={answerIsSubmitted}
           >
-            {answer.text}
+            {decodeHtml(answer.text)}
           </button>
         ))}
       </div>
