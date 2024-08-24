@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import SingleQuestion from "./SingleQuestion";
 import { IAnswerInfo, IQuestionInfo, QuizStatusType } from "../types";
 import Report from "./Report";
+import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
 interface QuizDisplayProps {
   allQuestions: IQuestionInfo[];
@@ -41,6 +42,10 @@ const QuizDisplay = ({
     }
   };
 
+  const handleReturnToQuizSetup = () => {
+    setQuizStatus("notStarted");
+  };
+
   const correctAnswer = quizStatus
     ? allQuestions[currentQNo].correct_answer
     : null;
@@ -70,12 +75,9 @@ const QuizDisplay = ({
             totalQuestions={allQuestions.length}
           ></SingleQuestion>
           <div className="action-btns">
-            <button
-              className="back-to-start-btn"
-              onClick={() => setQuizStatus("notStarted")}
-            >
-              Back to start
-            </button>
+            <ReturnToQuizSetupBtn
+              onClick={handleReturnToQuizSetup}
+            ></ReturnToQuizSetupBtn>
             <button
               className="submit-btn"
               disabled={selectedAnswer == null || answerIsSubmitted === true}
@@ -105,6 +107,7 @@ const QuizDisplay = ({
         <Report
           correctAnswers={correctAnswers.current}
           totalQuestions={allQuestions.length}
+          handleReturnToQuizSetup={handleReturnToQuizSetup}
         ></Report>
       )}
     </div>
