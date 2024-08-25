@@ -26,7 +26,7 @@ body {
 
 .header {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .quiz-setup,
@@ -43,7 +43,7 @@ body {
 
 .quiz-display {
   margin-top: 20px;
-  gap: 24px;
+  gap: 10px;
 }
 
 .number-input-container,
@@ -94,7 +94,7 @@ fieldset {
 .question-text {
   text-align: center;
   margin-bottom: 10px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .question-number {
@@ -106,8 +106,9 @@ fieldset {
 .answer-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  height: 130px;
+  gap: 20px;
+  height: 140px;
+  padding: 10px 0;
 }
 
 .answer-btn {
