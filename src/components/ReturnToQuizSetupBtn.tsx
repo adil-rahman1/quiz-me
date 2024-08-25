@@ -1,8 +1,8 @@
-interface ReturnToQuizSetupBtnProps {
+interface IReturnToQuizSetupBtnProps {
   onClick: () => void;
 }
 
-const ReturnToQuizSetupBtn = ({ onClick }: ReturnToQuizSetupBtnProps) => {
+const ReturnToQuizSetupBtn = ({ onClick }: IReturnToQuizSetupBtnProps) => {
   return (
     <button className="back-to-start-btn" onClick={onClick}>
       Back to start

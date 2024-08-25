@@ -3,7 +3,7 @@ import SingleQuestion from "./SingleQuestion";
 import { IAnswerInfo, IQuestionInfo, QuizStatusType } from "../types";
 import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
-interface QuizDisplayProps {
+interface IQuizDisplayProps {
   allQuestions: IQuestionInfo[];
   setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
   noOfCorrectAnswers: React.MutableRefObject<number>;
@@ -15,7 +15,7 @@ const QuizDisplay = ({
   setQuizStatus,
   noOfCorrectAnswers,
   handleReturnToQuizSetup,
-}: QuizDisplayProps) => {
+}: IQuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
   const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);

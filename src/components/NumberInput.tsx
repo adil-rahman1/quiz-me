@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface NumberInputProps {
+interface INumberInputProps {
   numberOfQuestions: number;
   setNumberOfQuestions: Dispatch<SetStateAction<number>>;
 }
@@ -8,7 +8,7 @@ interface NumberInputProps {
 const NumberInput = ({
   numberOfQuestions,
   setNumberOfQuestions,
-}: NumberInputProps) => {
+}: INumberInputProps) => {
   return (
     <div className="number-input-container">
       <label htmlFor="numberOfQuestions">Number of questions</label>

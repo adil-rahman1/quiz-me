@@ -13,12 +13,12 @@ import DifficultyRadioInput from "./DifficultyRadioInput";
 import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
 import CategoryInput from "./CategoryInput";
 
-interface QuizSetupProps {
+interface IQuizSetupProps {
   setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
   setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
 }
 
-const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
+const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<DifficultyType>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");

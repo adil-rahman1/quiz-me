@@ -2,11 +2,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ICategoryInfo } from "../types";
 import axios from "axios";
 
-interface CategoryInputProps {
+interface ICategoryInputProps {
   setSelectedCategoryInfo: Dispatch<SetStateAction<ICategoryInfo>>;
 }
 
-const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
+const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
   const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {

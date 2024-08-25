@@ -3,7 +3,7 @@ import shuffle from "../shuffleArray";
 import { useEffect } from "react";
 import decodeHtml from "../decodeHtml";
 
-interface SingleQuestionProps {
+interface ISingleQuestionProps {
   questionInfo: IQuestionInfo;
   selectedAnswer: number | null;
   setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
@@ -23,7 +23,7 @@ const SingleQuestion = ({
   setAllAnswers,
   currentQNo,
   totalQuestions,
-}: SingleQuestionProps) => {
+}: ISingleQuestionProps) => {
   useEffect(() => {
     const answers: string[] = [
       questionInfo.correct_answer,

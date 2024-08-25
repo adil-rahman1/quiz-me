@@ -1,6 +1,6 @@
 import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
-interface ReportProps {
+interface IReportProps {
   noOfCorrectAnswers: number;
   totalQuestions: number;
   handleReturnToQuizSetup: () => void;
@@ -10,7 +10,7 @@ const Report = ({
   noOfCorrectAnswers,
   totalQuestions,
   handleReturnToQuizSetup,
-}: ReportProps) => {
+}: IReportProps) => {
   const scoreAsPercentage = Math.floor(
     (noOfCorrectAnswers * 100) / totalQuestions
   );
