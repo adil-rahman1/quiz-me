@@ -71,11 +71,19 @@ const SingleQuestion = ({
       <div className="answer-grid">
         {allAnswers.map((answer, idx) => (
           <button
-            className={
-              selectedAnswer === idx
-                ? "answer-btn selected-answer-btn"
-                : "answer-btn"
-            }
+            className={[
+              "answer-btn",
+              selectedAnswer === idx && "selected-answer-btn",
+              answerIsSubmitted &&
+                selectedAnswer === idx &&
+                allAnswers[selectedAnswer!].isCorrect === false &&
+                "incorrect-answer-btn",
+              answerIsSubmitted &&
+                allAnswers[idx].isCorrect === true &&
+                "correct-answer-btn",
+            ]
+              .filter(Boolean)
+              .join(" ")}
             type="button"
             key={idx}
             onClick={() => {

@@ -17,7 +17,7 @@ body {
 
 .app {
   background-color: #9cc4e4;
-  padding: 24px;
+  padding: 16px;
   border-radius: 8px;
   width: 600px;
   height: 420px;
@@ -103,11 +103,21 @@ fieldset {
 
 .answer-btn {
   background-color: #e1ded2;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .answer-btn:hover,
 .selected-answer-btn {
   background-color: var(--gold-colour);
+}
+
+.incorrect-answer-btn {
+  background-color: #ff4c4c90;
+}
+
+.correct-answer-btn {
+  background-color: #4caf50;
 }
 
 .back-to-start-btn,
@@ -128,7 +138,6 @@ fieldset {
   justify-content: space-evenly;
 }
 
-.feedback,
 .report {
   text-align: center;
   font-size: 1.5rem;

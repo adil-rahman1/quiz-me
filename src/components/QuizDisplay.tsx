@@ -22,13 +22,13 @@ const QuizDisplay = ({
     useState<boolean>(true);
   const [currentQNo, setCurrentQNo] = useState<number>(0);
 
-  const correctAnswers = useRef(0);
+  const noOfCorrectAnswers = useRef(0);
 
   const handleSubmitAnswer = () => {
     setAnswerIsSubmitted(true);
     setNextButtonIsDisabled(false);
-    if (allAnswers[selectedAnswer!].text === correctAnswer)
-      correctAnswers.current++;
+    if (allAnswers[selectedAnswer!].text === correctAnswer.text)
+      noOfCorrectAnswers.current++;
   };
 
   const handleClickNext = () => {
@@ -46,19 +46,9 @@ const QuizDisplay = ({
     setQuizStatus("notStarted");
   };
 
-  const correctAnswer = quizStatus
-    ? allQuestions[currentQNo].correct_answer
-    : null;
-
-  const correctStyle = {
-    color: "green",
-    display: answerIsSubmitted ? "block" : "none",
-  };
-
-  const incorrectStyle = {
-    color: "red",
-    display: answerIsSubmitted ? "block" : "none",
-  };
+  const correctAnswer = allAnswers.filter(
+    (answerInfo) => answerInfo.isCorrect === true
+  )[0];
 
   return (
     <div>
@@ -93,19 +83,11 @@ const QuizDisplay = ({
               Next
             </button>
           </div>
-          <div className="feedback">
-            {answerIsSubmitted &&
-            allAnswers[selectedAnswer!].text == correctAnswer ? (
-              <p style={correctStyle}>{"That's correct"}</p>
-            ) : (
-              <p style={incorrectStyle}>{"That's incorrect"}</p>
-            )}
-          </div>
         </>
       )}
       {quizStatus === "completed" && (
         <Report
-          correctAnswers={correctAnswers.current}
+          noOfCorrectAnswers={noOfCorrectAnswers.current}
           totalQuestions={allQuestions.length}
           handleReturnToQuizSetup={handleReturnToQuizSetup}
         ></Report>
