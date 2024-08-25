@@ -108,7 +108,7 @@ fieldset {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   height: 140px;
-  padding: 10px 0;
+  padding: 0 0 30px;
 }
 
 .answer-btn {
