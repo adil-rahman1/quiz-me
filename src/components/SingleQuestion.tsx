@@ -61,14 +61,14 @@ const SingleQuestion = ({
 
   return (
     <>
-      <div>
+      <div className="question-container">
         <h1 className="progress">
           Question <span className="question-number">{currentQNo + 1}</span>/
           {totalQuestions}
         </h1>
         <p className="question-text">{decodeHtml(questionInfo.question)}</p>
       </div>
-      <div className="answer-grid">
+      <div className="answer-grid-container">
         {allAnswers.map((answer, idx) => (
           <button
             className={[

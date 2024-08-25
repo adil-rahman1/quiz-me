@@ -53,7 +53,7 @@ const QuizDisplay = ({
     selectedAnswer == null || answerIsSubmitted === true;
 
   return (
-    <div>
+    <div className="quiz-display">
       {quizStatus === "inProgress" && (
         <>
           <SingleQuestion

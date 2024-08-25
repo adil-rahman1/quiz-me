@@ -50,7 +50,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
     selectedCategoryInfo.name === "" ? true : false;
 
   return (
-    <>
+    <div className="quiz-setup">
       <NumberInput
         numberOfQuestions={numberOfQuestions}
         setNumberOfQuestions={setNumberOfQuestions}
@@ -77,7 +77,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
       >
         Begin
       </button>
-    </>
+    </div>
   );
 };
 

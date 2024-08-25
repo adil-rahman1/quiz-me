@@ -5,6 +5,7 @@
 
 * {
   font-family: "Courier New", Courier, monospace;
+  margin: 0;
 }
 
 body {
@@ -20,12 +21,29 @@ body {
   padding: 16px;
   border-radius: 8px;
   width: 600px;
-  height: 420px;
+  height: 450px;
 }
 
 .header {
   text-align: center;
   font-size: 2.5rem;
+}
+
+.quiz-setup,
+.quiz-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quiz-setup {
+  margin-top: 42px;
+  gap: 24px;
+}
+
+.quiz-display {
+  margin-top: 20px;
+  gap: 24px;
 }
 
 .number-input-container,
@@ -68,6 +86,10 @@ fieldset {
   background-color: var(--dark-gold-colour);
 }
 
+.question-container {
+  height: 160px;
+}
+
 .progress,
 .question-text {
   text-align: center;
@@ -81,10 +103,11 @@ fieldset {
   font-style: italic;
 }
 
-.answer-grid {
+.answer-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  height: 130px;
 }
 
 .answer-btn {
@@ -130,13 +153,21 @@ fieldset {
   padding: 8px;
 }
 
+.back-to-start-btn {
+  width: 160px;
+}
+
 .action-btns {
-  margin: 20px auto;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  gap: 50px;
 }
 
 .report {
   text-align: center;
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
