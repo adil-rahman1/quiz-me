@@ -18,15 +18,14 @@ const QuizDisplay = ({
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
   const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
-  const [nextButtonIsDisabled, setNextButtonIsDisabled] =
-    useState<boolean>(true);
+  const [nextBtnIsDisabled, setNextBtnIsDisabled] = useState<boolean>(true);
   const [currentQNo, setCurrentQNo] = useState<number>(0);
 
   const noOfCorrectAnswers = useRef(0);
 
   const handleSubmitAnswer = () => {
     setAnswerIsSubmitted(true);
-    setNextButtonIsDisabled(false);
+    setNextBtnIsDisabled(false);
     if (allAnswers[selectedAnswer!].text === correctAnswer.text)
       noOfCorrectAnswers.current++;
   };
@@ -36,7 +35,7 @@ const QuizDisplay = ({
       setCurrentQNo((prev) => prev + 1);
       setSelectedAnswer(null);
       setAnswerIsSubmitted(false);
-      setNextButtonIsDisabled(true);
+      setNextBtnIsDisabled(true);
     } else {
       setQuizStatus("completed");
     }
@@ -49,6 +48,9 @@ const QuizDisplay = ({
   const correctAnswer = allAnswers.filter(
     (answerInfo) => answerInfo.isCorrect === true
   )[0];
+
+  const submitBtnIsDisabled =
+    selectedAnswer == null || answerIsSubmitted === true;
 
   return (
     <div>
@@ -69,15 +71,17 @@ const QuizDisplay = ({
               onClick={handleReturnToQuizSetup}
             ></ReturnToQuizSetupBtn>
             <button
-              className="submit-btn"
-              disabled={selectedAnswer == null || answerIsSubmitted === true}
+              className={
+                submitBtnIsDisabled ? "submit-btn locked" : "submit-btn"
+              }
+              disabled={submitBtnIsDisabled}
               onClick={handleSubmitAnswer}
             >
               Submit
             </button>
             <button
-              className="next-btn"
-              disabled={nextButtonIsDisabled}
+              className={nextBtnIsDisabled ? "next-btn locked" : "next-btn"}
+              disabled={nextBtnIsDisabled}
               onClick={handleClickNext}
             >
               Next

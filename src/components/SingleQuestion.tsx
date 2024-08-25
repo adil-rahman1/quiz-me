@@ -81,6 +81,7 @@ const SingleQuestion = ({
               answerIsSubmitted &&
                 allAnswers[idx].isCorrect === true &&
                 "correct-answer-btn",
+              answerIsSubmitted && "locked",
             ]
               .filter(Boolean)
               .join(" ")}

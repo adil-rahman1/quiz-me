@@ -43,7 +43,7 @@ body {
 
 .number-input,
 .select-input,
-.begin-btn {
+.begin-quiz-btn {
   width: 60%;
   background-color: var(--gold-colour);
   border-radius: 8px;
@@ -60,12 +60,12 @@ fieldset {
   gap: 10px;
 }
 
-.begin-btn {
+.begin-quiz-btn {
   width: 100%;
 }
 
-.begin-btn:hover {
-  background-color: var(--gold-colour);
+.begin-quiz-btn:hover:not(.locked) {
+  background-color: var(--dark-gold-colour);
 }
 
 .progress,
@@ -87,28 +87,15 @@ fieldset {
   gap: 30px;
 }
 
-.answer-btn,
-.back-to-start-btn,
-.submit-btn,
-.next-btn {
-  border-radius: 8px;
-  padding: 8px;
-}
-
-.back-to-start-btn,
-.submit-btn,
-.next-btn {
-  border-width: 0;
-}
-
 .answer-btn {
   background-color: #e1ded2;
-  font-size: 1.1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.answer-btn:hover,
 .selected-answer-btn {
+  background-color: var(--gold-colour);
+}
+
+.answer-btn:hover:not(.locked) {
   background-color: var(--gold-colour);
 }
 
@@ -124,12 +111,23 @@ fieldset {
 .submit-btn,
 .next-btn {
   background-color: var(--gold-colour);
+  border-width: 0;
 }
 
 .back-to-start-btn:hover,
-.submit-btn:hover,
-.next-btn:hover {
+.submit-btn:hover:not(.locked),
+.next-btn:hover:not(.locked) {
   background-color: var(--dark-gold-colour);
+}
+
+.answer-btn,
+.back-to-start-btn,
+.submit-btn,
+.next-btn {
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px;
 }
 
 .action-btns {
