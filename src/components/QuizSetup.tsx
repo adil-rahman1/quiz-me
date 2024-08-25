@@ -46,7 +46,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
     }
   };
 
-  const beginQuizBtnIsDisabled =
+  const isBeginQuizBtnDisabled =
     selectedCategoryInfo.name === "" ? true : false;
 
   return (
@@ -70,10 +70,10 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: QuizSetupProps) => {
 
       <button
         className={
-          beginQuizBtnIsDisabled ? "begin-quiz-btn locked" : "begin-quiz-btn"
+          isBeginQuizBtnDisabled ? "begin-quiz-btn locked" : "begin-quiz-btn"
         }
         onClick={handleGenerateQuiz}
-        disabled={beginQuizBtnIsDisabled}
+        disabled={isBeginQuizBtnDisabled}
       >
         Begin
       </button>
