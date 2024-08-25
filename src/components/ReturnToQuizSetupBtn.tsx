@@ -1,6 +1,4 @@
-interface IReturnToQuizSetupBtnProps {
-  onClick: () => void;
-}
+import { IReturnToQuizSetupBtnProps } from "../types";
 
 const ReturnToQuizSetupBtn = ({ onClick }: IReturnToQuizSetupBtnProps) => {
   return (

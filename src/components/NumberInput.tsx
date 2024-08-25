@@ -1,9 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
-interface INumberInputProps {
-  numberOfQuestions: number;
-  setNumberOfQuestions: Dispatch<SetStateAction<number>>;
-}
+import { INumberInputProps } from "../types";
 
 const NumberInput = ({
   numberOfQuestions,

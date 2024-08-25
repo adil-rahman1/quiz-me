@@ -1,14 +1,7 @@
 import { useState } from "react";
 import SingleQuestion from "./SingleQuestion";
-import { IAnswerInfo, IQuestionInfo, QuizStatusType } from "../types";
+import { IQuizDisplayProps, IAnswerInfo } from "../types";
 import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
-
-interface IQuizDisplayProps {
-  allQuestions: IQuestionInfo[];
-  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
-  noOfCorrectAnswers: React.MutableRefObject<number>;
-  handleReturnToQuizSetup: () => void;
-}
 
 const QuizDisplay = ({
   allQuestions,

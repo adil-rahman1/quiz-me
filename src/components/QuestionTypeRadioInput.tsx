@@ -1,9 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-import { QuestionType } from "../types";
-
-interface IQuestionTypeRadioInputProps {
-  setQuestionType: Dispatch<SetStateAction<QuestionType>>;
-}
+import { IQuestionTypeRadioInputProps, QuestionType } from "../types";
 
 const QuestionTypeRadioInput = ({
   setQuestionType,

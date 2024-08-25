@@ -1,18 +1,7 @@
-import { IQuestionInfo, IAnswerInfo } from "../types";
+import { ISingleQuestionProps, IAnswerInfo } from "../types";
 import shuffle from "../shuffleArray";
 import { useEffect } from "react";
 import decodeHtml from "../decodeHtml";
-
-interface ISingleQuestionProps {
-  questionInfo: IQuestionInfo;
-  selectedAnswer: number | null;
-  setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
-  answerIsSubmitted: boolean;
-  allAnswers: IAnswerInfo[];
-  setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
-  currentQNo: number;
-  totalQuestions: number;
-}
 
 const SingleQuestion = ({
   questionInfo,

@@ -1,22 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import {
+  IQuizSetupProps,
   DifficultyType,
   QuestionType,
-  QuizStatusType,
   ICategoryInfo,
-  IQuestionInfo,
 } from "../types";
-import { Dispatch, SetStateAction } from "react";
 import NumberInput from "./NumberInput";
 import DifficultyRadioInput from "./DifficultyRadioInput";
 import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
 import CategoryInput from "./CategoryInput";
-
-interface IQuizSetupProps {
-  setAllQuestions: Dispatch<SetStateAction<IQuestionInfo[]>>;
-  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
-}
 
 const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);

@@ -1,6 +1,6 @@
+type QuizStatusType = "notStarted" | "inProgress" | "completed";
 type DifficultyType = "easy" | "medium" | "hard";
 type QuestionType = "multiple" | "boolean";
-type QuizStatusType = "notStarted" | "inProgress" | "completed";
 
 interface ICategoryInfo {
   id: number;
@@ -21,11 +21,70 @@ interface IAnswerInfo {
   text: string;
 }
 
+interface IQuizSetupProps {
+  setAllQuestions: React.Dispatch<React.SetStateAction<IQuestionInfo[]>>;
+  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
+}
+
+interface INumberInputProps {
+  numberOfQuestions: number;
+  setNumberOfQuestions: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface IDifficultyRadioInputProps {
+  setDifficulty: React.Dispatch<React.SetStateAction<DifficultyType>>;
+}
+
+interface IQuestionTypeRadioInputProps {
+  setQuestionType: React.Dispatch<React.SetStateAction<QuestionType>>;
+}
+
+interface ICategoryInputProps {
+  setSelectedCategoryInfo: React.Dispatch<React.SetStateAction<ICategoryInfo>>;
+}
+
+interface IQuizDisplayProps {
+  allQuestions: IQuestionInfo[];
+  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
+  noOfCorrectAnswers: React.MutableRefObject<number>;
+  handleReturnToQuizSetup: () => void;
+}
+
+interface ISingleQuestionProps {
+  questionInfo: IQuestionInfo;
+  selectedAnswer: number | null;
+  setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
+  answerIsSubmitted: boolean;
+  allAnswers: IAnswerInfo[];
+  setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
+  currentQNo: number;
+  totalQuestions: number;
+}
+
+interface IReturnToQuizSetupBtnProps {
+  onClick: () => void;
+}
+
+interface IReportProps {
+  noOfCorrectAnswers: number;
+  totalQuestions: number;
+  handleReturnToQuizSetup: () => void;
+}
+
 export type {
+  QuizStatusType,
   DifficultyType,
   QuestionType,
-  QuizStatusType,
   ICategoryInfo,
   IQuestionInfo,
   IAnswerInfo,
+  IQuizSetupProps,
+  INumberInputProps,
+  IDifficultyRadioInputProps,
+  IQuestionTypeRadioInputProps,
+  ICategoryInputProps,
+  IQuizDisplayProps,
+  ISingleQuestionProps,
+  IReturnToQuizSetupBtnProps,
+  IReportProps,
 };

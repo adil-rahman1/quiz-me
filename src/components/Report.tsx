@@ -1,10 +1,5 @@
+import { IReportProps } from "../types";
 import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
-
-interface IReportProps {
-  noOfCorrectAnswers: number;
-  totalQuestions: number;
-  handleReturnToQuizSetup: () => void;
-}
 
 const Report = ({
   noOfCorrectAnswers,
