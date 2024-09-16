@@ -14,9 +14,7 @@ const Report = ({
       <p>
         You scored {scoreAsPercentage}% ({noOfCorrectAnswers}/{totalQuestions})
       </p>
-      <ReturnToQuizSetupBtn
-        onClick={handleReturnToQuizSetup}
-      ></ReturnToQuizSetupBtn>
+      <ReturnToQuizSetupBtn onClick={handleReturnToQuizSetup} />
     </div>
   );
 };

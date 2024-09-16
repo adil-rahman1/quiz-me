@@ -47,20 +47,10 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
       <NumberInput
         numberOfQuestions={numberOfQuestions}
         setNumberOfQuestions={setNumberOfQuestions}
-      ></NumberInput>
-
-      <DifficultyRadioInput
-        setDifficulty={setDifficulty}
-      ></DifficultyRadioInput>
-
-      <QuestionTypeRadioInput
-        setQuestionType={setQuestionType}
-      ></QuestionTypeRadioInput>
-
-      <CategoryInput
-        setSelectedCategoryInfo={setSelectedCategoryInfo}
-      ></CategoryInput>
-
+      />
+      <DifficultyRadioInput setDifficulty={setDifficulty} />
+      <QuestionTypeRadioInput setQuestionType={setQuestionType} />
+      <CategoryInput setSelectedCategoryInfo={setSelectedCategoryInfo} />
       <button
         className={
           isBeginQuizBtnDisabled ? "begin-quiz-btn locked" : "begin-quiz-btn"

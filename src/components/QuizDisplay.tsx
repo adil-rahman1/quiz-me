@@ -51,11 +51,9 @@ const QuizDisplay = ({
         setAllAnswers={setAllAnswers}
         currentQNo={currentQNo}
         totalQuestions={allQuestions.length}
-      ></SingleQuestion>
+      />
       <div className="action-btns">
-        <ReturnToQuizSetupBtn
-          onClick={handleReturnToQuizSetup}
-        ></ReturnToQuizSetupBtn>
+        <ReturnToQuizSetupBtn onClick={handleReturnToQuizSetup} />
         <button
           className={isSubmitBtnDisabled ? "submit-btn locked" : "submit-btn"}
           disabled={isSubmitBtnDisabled}

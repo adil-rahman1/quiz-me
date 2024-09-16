@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
-import QuizSetup from "./QuizSetup";
-import { QuizStatusType, IQuestionInfo } from "../types";
 import QuizDisplay from "./QuizDisplay";
-import "../styles.css";
+import QuizSetup from "./QuizSetup";
 import Report from "./Report";
+import { IQuestionInfo, QuizStatusType } from "../types";
+import "../styles.css";
 
 const App = () => {
   const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
@@ -19,12 +19,12 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header></Header>
+      <Header />
       {quizStatus === "notStarted" && (
         <QuizSetup
           setAllQuestions={setAllQuestions}
           setQuizStatus={setQuizStatus}
-        ></QuizSetup>
+        />
       )}
       {quizStatus == "inProgress" && (
         <QuizDisplay
@@ -32,14 +32,14 @@ const App = () => {
           setQuizStatus={setQuizStatus}
           noOfCorrectAnswers={noOfCorrectAnswers}
           handleReturnToQuizSetup={handleReturnToQuizSetup}
-        ></QuizDisplay>
+        />
       )}
       {quizStatus === "completed" && (
         <Report
           noOfCorrectAnswers={noOfCorrectAnswers.current}
           totalQuestions={allQuestions.length}
           handleReturnToQuizSetup={handleReturnToQuizSetup}
-        ></Report>
+        />
       )}
     </div>
   );
