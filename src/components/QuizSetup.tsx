@@ -16,10 +16,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
   const [difficulty, setDifficulty] = useState<DifficultyType>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
-    useState<ICategoryInfo>({
-      id: -1,
-      name: "",
-    });
+    useState<ICategoryInfo | null>(null);
 
   const handleGenerateQuiz = async () => {
     try {
@@ -39,8 +36,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
     }
   };
 
-  const isBeginQuizBtnDisabled =
-    selectedCategoryInfo.name === "" ? true : false;
+  const isBeginQuizBtnDisabled = selectedCategoryInfo === null;
 
   return (
     <div className="quiz-setup">

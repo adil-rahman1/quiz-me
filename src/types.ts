@@ -40,7 +40,9 @@ interface IQuestionTypeRadioInputProps {
 }
 
 interface ICategoryInputProps {
-  setSelectedCategoryInfo: React.Dispatch<React.SetStateAction<ICategoryInfo>>;
+  setSelectedCategoryInfo: React.Dispatch<
+    React.SetStateAction<ICategoryInfo | null>
+  >;
 }
 
 interface IQuizDisplayProps {

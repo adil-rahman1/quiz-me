@@ -3,7 +3,7 @@ import { ICategoryInputProps, ICategoryInfo } from "../types";
 import axios from "axios";
 
 const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
+  const [categories, setCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {
     const fetchAndStoreAllCategories = async () => {
@@ -11,7 +11,7 @@ const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
         const response = await axios.get(
           "https://opentdb.com/api_category.php"
         );
-        setAllCategories(response.data.trivia_categories);
+        setCategories(response.data.trivia_categories);
       } catch (error) {
         console.error(error);
       }
@@ -21,18 +21,12 @@ const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
 
   const handleChangeCategory = (categoryName: string) => {
     if (categoryName === "none") {
-      setSelectedCategoryInfo({
-        id: -1,
-        name: "",
-      });
+      setSelectedCategoryInfo(null);
     } else {
-      const categoryInfo: ICategoryInfo = allCategories.filter(
+      const categoryInfo: ICategoryInfo = categories.filter(
         (catInfo: ICategoryInfo) => catInfo.name === categoryName
       )[0];
-      setSelectedCategoryInfo({
-        id: categoryInfo.id,
-        name: categoryInfo.name,
-      });
+      setSelectedCategoryInfo(categoryInfo);
     }
   };
 
@@ -46,7 +40,7 @@ const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
         onChange={(e) => handleChangeCategory(e.target.value)}
       >
         <option value="none">Choose a category</option>
-        {allCategories.map((data) => (
+        {categories.map((data) => (
           <option key={data.id} value={data.name}>
             {data.name}
           </option>
