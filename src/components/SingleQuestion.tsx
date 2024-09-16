@@ -8,8 +8,8 @@ const SingleQuestion = ({
   selectedAnswer,
   setSelectedAnswer,
   answerIsSubmitted,
-  allAnswers,
-  setAllAnswers,
+  answers,
+  setAnswers,
   currentQNo,
   totalQuestions,
 }: ISingleQuestionProps) => {
@@ -37,7 +37,7 @@ const SingleQuestion = ({
       });
     }
 
-    setAllAnswers(
+    setAnswers(
       answersAsAnswerInfoList.length === 2
         ? answersAsAnswerInfoList
         : shuffle(answersAsAnswerInfoList)
@@ -58,17 +58,17 @@ const SingleQuestion = ({
         <p className="question-text">{decodeHtml(questionInfo.question)}</p>
       </div>
       <div className="answer-grid-container">
-        {allAnswers.map((answer, idx) => (
+        {answers.map((answer, idx) => (
           <button
             className={[
               "answer-btn",
               selectedAnswer === idx && "selected-answer-btn",
               answerIsSubmitted &&
                 selectedAnswer === idx &&
-                allAnswers[selectedAnswer!].isCorrect === false &&
+                answers[selectedAnswer!].isCorrect === false &&
                 "incorrect-answer-btn",
               answerIsSubmitted &&
-                allAnswers[idx].isCorrect === true &&
+                answers[idx].isCorrect === true &&
                 "correct-answer-btn",
               answerIsSubmitted && "locked",
             ]

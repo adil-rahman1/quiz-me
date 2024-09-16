@@ -4,13 +4,13 @@ import { IQuizDisplayProps, IAnswerInfo } from "../types";
 import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
 const QuizDisplay = ({
-  allQuestions,
+  questions,
   setQuizStatus,
   noOfCorrectAnswers,
   handleReturnToQuizSetup,
 }: IQuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
+  const [answers, setAnswers] = useState<IAnswerInfo[]>([]);
   const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState<boolean>(true);
   const [currentQNo, setCurrentQNo] = useState<number>(0);
@@ -18,12 +18,12 @@ const QuizDisplay = ({
   const handleSubmitAnswer = () => {
     setAnswerIsSubmitted(true);
     setIsNextBtnDisabled(false);
-    if (allAnswers[selectedAnswer!].text === correctAnswer.text)
+    if (answers[selectedAnswer!].text === correctAnswer.text)
       noOfCorrectAnswers.current++;
   };
 
   const handleClickNext = () => {
-    if (currentQNo < allQuestions.length - 1) {
+    if (currentQNo < questions.length - 1) {
       setCurrentQNo((prev) => prev + 1);
       setSelectedAnswer(null);
       setAnswerIsSubmitted(false);
@@ -33,7 +33,7 @@ const QuizDisplay = ({
     }
   };
 
-  const correctAnswer = allAnswers.filter(
+  const correctAnswer = answers.filter(
     (answerInfo) => answerInfo.isCorrect === true
   )[0];
 
@@ -43,14 +43,14 @@ const QuizDisplay = ({
   return (
     <div className="quiz-display">
       <SingleQuestion
-        questionInfo={allQuestions[currentQNo]}
+        questionInfo={questions[currentQNo]}
         selectedAnswer={selectedAnswer}
         setSelectedAnswer={setSelectedAnswer}
         answerIsSubmitted={answerIsSubmitted}
-        allAnswers={allAnswers}
-        setAllAnswers={setAllAnswers}
+        answers={answers}
+        setAnswers={setAnswers}
         currentQNo={currentQNo}
-        totalQuestions={allQuestions.length}
+        totalQuestions={questions.length}
       />
       <div className="action-btns">
         <ReturnToQuizSetupBtn onClick={handleReturnToQuizSetup} />

@@ -22,7 +22,7 @@ interface IAnswerInfo {
 }
 
 interface IQuizSetupProps {
-  setAllQuestions: React.Dispatch<React.SetStateAction<IQuestionInfo[]>>;
+  setQuestions: React.Dispatch<React.SetStateAction<IQuestionInfo[]>>;
   setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
 }
 
@@ -46,7 +46,7 @@ interface ICategoryInputProps {
 }
 
 interface IQuizDisplayProps {
-  allQuestions: IQuestionInfo[];
+  questions: IQuestionInfo[];
   setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
   noOfCorrectAnswers: React.MutableRefObject<number>;
   handleReturnToQuizSetup: () => void;
@@ -57,8 +57,8 @@ interface ISingleQuestionProps {
   selectedAnswer: number | null;
   setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
   answerIsSubmitted: boolean;
-  allAnswers: IAnswerInfo[];
-  setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
+  answers: IAnswerInfo[];
+  setAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
   currentQNo: number;
   totalQuestions: number;
 }

@@ -11,7 +11,7 @@ import DifficultyRadioInput from "./DifficultyRadioInput";
 import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
 import CategoryInput from "./CategoryInput";
 
-const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
+const QuizSetup = ({ setQuestions, setQuizStatus }: IQuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
   const [difficulty, setDifficulty] = useState<DifficultyType>("easy");
   const [questionType, setQuestionType] = useState<QuestionType>("multiple");
@@ -25,7 +25,7 @@ const QuizSetup = ({ setAllQuestions, setQuizStatus }: IQuizSetupProps) => {
       );
       switch (response.data.response_code) {
         case 0:
-          setAllQuestions(response.data.results);
+          setQuestions(response.data.results);
           setQuizStatus("inProgress");
           break;
         case 1:

@@ -6,7 +6,7 @@ const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
   const [categories, setCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {
-    const fetchAndStoreAllCategories = async () => {
+    const fetchAndStoreCategories = async () => {
       try {
         const response = await axios.get(
           "https://opentdb.com/api_category.php"
@@ -16,7 +16,7 @@ const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
         console.error(error);
       }
     };
-    fetchAndStoreAllCategories();
+    fetchAndStoreCategories();
   }, []);
 
   const handleChangeCategory = (categoryName: string) => {

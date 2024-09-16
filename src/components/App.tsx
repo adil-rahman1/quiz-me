@@ -7,7 +7,7 @@ import { IQuestionInfo, QuizStatusType } from "../types";
 import "../styles.css";
 
 const App = () => {
-  const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
+  const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
   const [quizStatus, setQuizStatus] = useState<QuizStatusType>("notStarted");
 
   const handleReturnToQuizSetup = () => {
@@ -21,14 +21,11 @@ const App = () => {
     <div className="app">
       <Header />
       {quizStatus === "notStarted" && (
-        <QuizSetup
-          setAllQuestions={setAllQuestions}
-          setQuizStatus={setQuizStatus}
-        />
+        <QuizSetup setQuestions={setQuestions} setQuizStatus={setQuizStatus} />
       )}
       {quizStatus == "inProgress" && (
         <QuizDisplay
-          allQuestions={allQuestions}
+          questions={questions}
           setQuizStatus={setQuizStatus}
           noOfCorrectAnswers={noOfCorrectAnswers}
           handleReturnToQuizSetup={handleReturnToQuizSetup}
@@ -37,7 +34,7 @@ const App = () => {
       {quizStatus === "completed" && (
         <Report
           noOfCorrectAnswers={noOfCorrectAnswers.current}
-          totalQuestions={allQuestions.length}
+          totalQuestions={questions.length}
           handleReturnToQuizSetup={handleReturnToQuizSetup}
         />
       )}
