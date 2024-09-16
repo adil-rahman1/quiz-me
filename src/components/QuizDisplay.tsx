@@ -11,22 +11,22 @@ const QuizDisplay = ({
 }: IQuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<IAnswerInfo[]>([]);
-  const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState<boolean>(true);
-  const [currentQNo, setCurrentQNo] = useState<number>(0);
+  const [currentQuestionIdx, setCurrentQuestionIdx] = useState<number>(0);
 
   const handleSubmitAnswer = () => {
-    setAnswerIsSubmitted(true);
+    setIsAnswerSubmitted(true);
     setIsNextBtnDisabled(false);
     if (answers[selectedAnswer!].text === correctAnswer.text)
       noOfCorrectAnswers.current++;
   };
 
   const handleClickNext = () => {
-    if (currentQNo < questions.length - 1) {
-      setCurrentQNo((prev) => prev + 1);
+    if (currentQuestionIdx < questions.length - 1) {
+      setCurrentQuestionIdx((prev) => prev + 1);
       setSelectedAnswer(null);
-      setAnswerIsSubmitted(false);
+      setIsAnswerSubmitted(false);
       setIsNextBtnDisabled(true);
     } else {
       setQuizStatus("completed");
@@ -37,19 +37,18 @@ const QuizDisplay = ({
     (answerInfo) => answerInfo.isCorrect === true
   )[0];
 
-  const isSubmitBtnDisabled =
-    selectedAnswer == null || answerIsSubmitted === true;
+  const isSubmitBtnDisabled = !selectedAnswer || isAnswerSubmitted;
 
   return (
     <div className="quiz-display">
       <SingleQuestion
-        questionInfo={questions[currentQNo]}
+        questionInfo={questions[currentQuestionIdx]}
         selectedAnswer={selectedAnswer}
         setSelectedAnswer={setSelectedAnswer}
-        answerIsSubmitted={answerIsSubmitted}
+        answerIsSubmitted={isAnswerSubmitted}
         answers={answers}
         setAnswers={setAnswers}
-        currentQNo={currentQNo}
+        currentQNo={currentQuestionIdx}
         totalQuestions={questions.length}
       />
       <div className="action-btns">
