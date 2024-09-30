@@ -48,7 +48,7 @@ interface ICategoryInputProps {
 interface IQuizDisplayProps {
   questions: IQuestionInfo[];
   setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatus>>;
-  noOfCorrectAnswers: React.MutableRefObject<number>;
+  setNoOfCorrectAnswers: React.Dispatch<React.SetStateAction<number>>;
   handleReturnToQuizSetup: () => void;
 }
 

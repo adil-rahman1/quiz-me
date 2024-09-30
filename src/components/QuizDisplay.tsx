@@ -6,7 +6,7 @@ import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 const QuizDisplay = ({
   questions,
   setQuizStatus,
-  noOfCorrectAnswers,
+  setNoOfCorrectAnswers,
   handleReturnToQuizSetup,
 }: IQuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -19,7 +19,7 @@ const QuizDisplay = ({
     setIsAnswerSubmitted(true);
     setIsNextBtnDisabled(false);
     if (answers[selectedAnswer!].text === correctAnswer.text)
-      noOfCorrectAnswers.current++;
+      setNoOfCorrectAnswers((prev) => prev + 1);
   };
 
   const handleClickNext = () => {
