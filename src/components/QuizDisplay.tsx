@@ -37,7 +37,7 @@ const QuizDisplay = ({
     (answerInfo) => answerInfo.isCorrect === true
   )[0];
 
-  const isSubmitBtnDisabled = !selectedAnswer || isAnswerSubmitted;
+  const isSubmitBtnDisabled = selectedAnswer == null || isAnswerSubmitted;
 
   return (
     <div className="quiz-display">

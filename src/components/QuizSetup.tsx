@@ -1,11 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import {
-  IQuizSetupProps,
-  DifficultyType,
-  QuestionType,
-  ICategoryInfo,
-} from "../types";
+import { IQuizSetupProps, Difficulty, Question, ICategoryInfo } from "../types";
 import NumberInput from "./NumberInput";
 import DifficultyRadioInput from "./DifficultyRadioInput";
 import QuestionTypeRadioInput from "./QuestionTypeRadioInput";
@@ -13,8 +8,8 @@ import CategoryInput from "./CategoryInput";
 
 const QuizSetup = ({ setQuestions, setQuizStatus }: IQuizSetupProps) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(10);
-  const [difficulty, setDifficulty] = useState<DifficultyType>("easy");
-  const [questionType, setQuestionType] = useState<QuestionType>("multiple");
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [questionType, setQuestionType] = useState<Question>("multiple");
   const [selectedCategoryInfo, setSelectedCategoryInfo] =
     useState<ICategoryInfo | null>(null);
 

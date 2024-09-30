@@ -1,6 +1,6 @@
-type QuizStatusType = "notStarted" | "inProgress" | "completed";
-type DifficultyType = "easy" | "medium" | "hard";
-type QuestionType = "multiple" | "boolean";
+type QuizStatus = "notStarted" | "inProgress" | "completed";
+type Difficulty = "easy" | "medium" | "hard";
+type Question = "multiple" | "boolean";
 
 interface ICategoryInfo {
   id: number;
@@ -8,8 +8,8 @@ interface ICategoryInfo {
 }
 
 interface IQuestionInfo {
-  type: QuestionType;
-  difficulty: DifficultyType;
+  type: Question;
+  difficulty: Difficulty;
   category: string;
   question: string;
   correct_answer: string;
@@ -23,7 +23,7 @@ interface IAnswerInfo {
 
 interface IQuizSetupProps {
   setQuestions: React.Dispatch<React.SetStateAction<IQuestionInfo[]>>;
-  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
+  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatus>>;
 }
 
 interface INumberInputProps {
@@ -32,11 +32,11 @@ interface INumberInputProps {
 }
 
 interface IDifficultyRadioInputProps {
-  setDifficulty: React.Dispatch<React.SetStateAction<DifficultyType>>;
+  setDifficulty: React.Dispatch<React.SetStateAction<Difficulty>>;
 }
 
 interface IQuestionTypeRadioInputProps {
-  setQuestionType: React.Dispatch<React.SetStateAction<QuestionType>>;
+  setQuestionType: React.Dispatch<React.SetStateAction<Question>>;
 }
 
 interface ICategoryInputProps {
@@ -47,7 +47,7 @@ interface ICategoryInputProps {
 
 interface IQuizDisplayProps {
   questions: IQuestionInfo[];
-  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
+  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatus>>;
   noOfCorrectAnswers: React.MutableRefObject<number>;
   handleReturnToQuizSetup: () => void;
 }
@@ -74,9 +74,9 @@ interface IReportProps {
 }
 
 export type {
-  QuizStatusType,
-  DifficultyType,
-  QuestionType,
+  QuizStatus,
+  Difficulty,
+  Question,
   ICategoryInfo,
   IQuestionInfo,
   IAnswerInfo,

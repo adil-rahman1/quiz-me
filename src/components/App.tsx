@@ -3,12 +3,12 @@ import Header from "./Header";
 import QuizDisplay from "./QuizDisplay";
 import QuizSetup from "./QuizSetup";
 import Report from "./Report";
-import { IQuestionInfo, QuizStatusType } from "../types";
+import { IQuestionInfo, QuizStatus } from "../types";
 import "../styles.css";
 
 const App = () => {
   const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
-  const [quizStatus, setQuizStatus] = useState<QuizStatusType>("notStarted");
+  const [quizStatus, setQuizStatus] = useState<QuizStatus>("notStarted");
 
   const handleReturnToQuizSetup = () => {
     setQuizStatus("notStarted");

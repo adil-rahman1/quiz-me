@@ -1,10 +1,10 @@
-import { IQuestionTypeRadioInputProps, QuestionType } from "../types";
+import { IQuestionTypeRadioInputProps, Question } from "../types";
 
 const QuestionTypeRadioInput = ({
   setQuestionType,
 }: IQuestionTypeRadioInputProps) => {
   const onQuestionTypeChange = (nextVal: string) => {
-    setQuestionType(nextVal as QuestionType);
+    setQuestionType(nextVal as Question);
   };
 
   return (

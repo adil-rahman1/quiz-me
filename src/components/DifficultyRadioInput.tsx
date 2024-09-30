@@ -1,10 +1,10 @@
-import { IDifficultyRadioInputProps, DifficultyType } from "../types";
+import { IDifficultyRadioInputProps, Difficulty } from "../types";
 
 const DifficultyRadioInput = ({
   setDifficulty,
 }: IDifficultyRadioInputProps) => {
   const onDifficultyChange = (nextVal: string) => {
-    setDifficulty(nextVal as DifficultyType);
+    setDifficulty(nextVal as Difficulty);
   };
 
   return (
