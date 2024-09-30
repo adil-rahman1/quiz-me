@@ -16,7 +16,7 @@ const QuizSetup = ({ setQuestions, setQuizStatus }: IQuizSetupProps) => {
   const handleGenerateQuiz = async () => {
     try {
       const response = await axios.get(
-        `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo.id}&difficulty=${difficulty}&type=${questionType}`
+        `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${selectedCategoryInfo?.id}&difficulty=${difficulty}&type=${questionType}`
       );
       switch (response.data.response_code) {
         case 0:
