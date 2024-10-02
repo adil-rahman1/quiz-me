@@ -7,7 +7,7 @@ const SingleQuestion = ({
   questionInfo,
   selectedAnswer,
   setSelectedAnswer,
-  answerIsSubmitted,
+  isAnswerSubmitted,
   answers,
   setAnswers,
   currentQNo,
@@ -59,7 +59,7 @@ const SingleQuestion = ({
       classes.push("selected-answer-btn");
     }
 
-    if (answerIsSubmitted) {
+    if (isAnswerSubmitted) {
       classes.push("locked");
 
       if (isSelected && !isSelectedCorrect) {
@@ -92,7 +92,7 @@ const SingleQuestion = ({
             onClick={() => {
               handleSelectAnAnswer(idx);
             }}
-            disabled={answerIsSubmitted}
+            disabled={isAnswerSubmitted}
           >
             {decodeHtml(answer.text)}
           </button>

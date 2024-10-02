@@ -56,7 +56,7 @@ interface ISingleQuestionProps {
   questionInfo: IQuestionInfo;
   selectedAnswer: number | null;
   setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
-  answerIsSubmitted: boolean;
+  isAnswerSubmitted: boolean;
   answers: IAnswerInfo[];
   setAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
   currentQNo: number;
