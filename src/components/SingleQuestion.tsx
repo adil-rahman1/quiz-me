@@ -48,6 +48,32 @@ const SingleQuestion = ({
     setSelectedAnswer(selectedAnswer === idx ? null : idx);
   };
 
+  const getClass = (idx: number) => {
+    const classes = ["answer-btn"];
+    const isSelected = selectedAnswer === idx;
+    const isCorrect = answers[idx].isCorrect;
+    const isSelectedCorrect =
+      selectedAnswer !== null && answers[selectedAnswer]?.isCorrect;
+
+    if (isSelected) {
+      classes.push("selected-answer-btn");
+    }
+
+    if (answerIsSubmitted) {
+      classes.push("locked");
+
+      if (isSelected && !isSelectedCorrect) {
+        classes.push("incorrect-answer-btn");
+      }
+
+      if (isCorrect) {
+        classes.push("correct-answer-btn");
+      }
+    }
+
+    return classes.join(" ");
+  };
+
   return (
     <>
       <div className="question-container">
@@ -60,20 +86,7 @@ const SingleQuestion = ({
       <div className="answer-grid-container">
         {answers.map((answer, idx) => (
           <button
-            className={[
-              "answer-btn",
-              selectedAnswer === idx && "selected-answer-btn",
-              answerIsSubmitted &&
-                selectedAnswer === idx &&
-                answers[selectedAnswer!].isCorrect === false &&
-                "incorrect-answer-btn",
-              answerIsSubmitted &&
-                answers[idx].isCorrect === true &&
-                "correct-answer-btn",
-              answerIsSubmitted && "locked",
-            ]
-              .filter(Boolean)
-              .join(" ")}
+            className={getClass(idx)}
             type="button"
             key={idx}
             onClick={() => {
