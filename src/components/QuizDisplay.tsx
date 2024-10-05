@@ -1,112 +1,73 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import SingleQuestion from "./SingleQuestion";
-import { IAnswerInfo, IQuestionInfo, QuizStatusType } from "../types";
-import Report from "./Report";
-
-interface QuizDisplayProps {
-  allQuestions: IQuestionInfo[];
-  quizStatus: QuizStatusType;
-  setQuizStatus: React.Dispatch<React.SetStateAction<QuizStatusType>>;
-}
+import { IQuizDisplayProps, IAnswerInfo } from "../types";
+import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
 const QuizDisplay = ({
-  allQuestions,
-  quizStatus,
+  questions,
   setQuizStatus,
-}: QuizDisplayProps) => {
+  setNoOfCorrectAnswers,
+  handleReturnToQuizSetup,
+}: IQuizDisplayProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [allAnswers, setAllAnswers] = useState<IAnswerInfo[]>([]);
-  const [answerIsSubmitted, setAnswerIsSubmitted] = useState<boolean>(false);
-  const [nextButtonIsDisabled, setNextButtonIsDisabled] =
-    useState<boolean>(true);
-  const [currentQNo, setCurrentQNo] = useState<number>(0);
-
-  const correctAnswers = useRef(0);
+  const [answers, setAnswers] = useState<IAnswerInfo[]>([]);
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
+  const [isNextBtnDisabled, setIsNextBtnDisabled] = useState<boolean>(true);
+  const [currentQuestionIdx, setCurrentQuestionIdx] = useState<number>(0);
 
   const handleSubmitAnswer = () => {
-    setAnswerIsSubmitted(true);
-    setNextButtonIsDisabled(false);
-    if (allAnswers[selectedAnswer!].text === correctAnswer)
-      correctAnswers.current++;
+    setIsAnswerSubmitted(true);
+    setIsNextBtnDisabled(false);
+    if (answers[selectedAnswer!].text === correctAnswer.text)
+      setNoOfCorrectAnswers((prev) => prev + 1);
   };
 
   const handleClickNext = () => {
-    if (currentQNo < allQuestions.length - 1) {
-      setCurrentQNo((prev) => prev + 1);
+    if (currentQuestionIdx < questions.length - 1) {
+      setCurrentQuestionIdx((prev) => prev + 1);
       setSelectedAnswer(null);
-      setAnswerIsSubmitted(false);
-      setNextButtonIsDisabled(true);
+      setIsAnswerSubmitted(false);
+      setIsNextBtnDisabled(true);
     } else {
       setQuizStatus("completed");
     }
   };
 
-  const correctAnswer = quizStatus
-    ? allQuestions[currentQNo].correct_answer
-    : null;
+  const correctAnswer = answers.filter(
+    (answerInfo) => answerInfo.isCorrect === true
+  )[0];
 
-  const correctStyle = {
-    color: "green",
-    display: answerIsSubmitted ? "block" : "none",
-  };
-
-  const incorrectStyle = {
-    color: "red",
-    display: answerIsSubmitted ? "block" : "none",
-  };
+  const isSubmitBtnDisabled = selectedAnswer == null || isAnswerSubmitted;
 
   return (
-    <div>
-      {quizStatus === "inProgress" && (
-        <>
-          <SingleQuestion
-            questionInfo={allQuestions[currentQNo]}
-            selectedAnswer={selectedAnswer}
-            setSelectedAnswer={setSelectedAnswer}
-            answerIsSubmitted={answerIsSubmitted}
-            allAnswers={allAnswers}
-            setAllAnswers={setAllAnswers}
-            currentQNo={currentQNo}
-            totalQuestions={allQuestions.length}
-          ></SingleQuestion>
-          <div className="action-btns">
-            <button
-              className="back-to-start-btn"
-              onClick={() => setQuizStatus("notStarted")}
-            >
-              Back to start
-            </button>
-            <button
-              className="submit-btn"
-              disabled={selectedAnswer == null || answerIsSubmitted === true}
-              onClick={handleSubmitAnswer}
-            >
-              Submit
-            </button>
-            <button
-              className="next-btn"
-              disabled={nextButtonIsDisabled}
-              onClick={handleClickNext}
-            >
-              Next
-            </button>
-          </div>
-          <div className="feedback">
-            {answerIsSubmitted &&
-            allAnswers[selectedAnswer!].text == correctAnswer ? (
-              <p style={correctStyle}>{"That's correct"}</p>
-            ) : (
-              <p style={incorrectStyle}>{"That's incorrect"}</p>
-            )}
-          </div>
-        </>
-      )}
-      {quizStatus === "completed" && (
-        <Report
-          correctAnswers={correctAnswers.current}
-          totalQuestions={allQuestions.length}
-        ></Report>
-      )}
+    <div className="quiz-display">
+      <SingleQuestion
+        questionInfo={questions[currentQuestionIdx]}
+        selectedAnswer={selectedAnswer}
+        setSelectedAnswer={setSelectedAnswer}
+        isAnswerSubmitted={isAnswerSubmitted}
+        answers={answers}
+        setAnswers={setAnswers}
+        currentQNo={currentQuestionIdx}
+        totalQuestions={questions.length}
+      />
+      <div className="action-btns">
+        <ReturnToQuizSetupBtn onClick={handleReturnToQuizSetup} />
+        <button
+          className={isSubmitBtnDisabled ? "submit-btn locked" : "submit-btn"}
+          disabled={isSubmitBtnDisabled}
+          onClick={handleSubmitAnswer}
+        >
+          Submit
+        </button>
+        <button
+          className={isNextBtnDisabled ? "next-btn locked" : "next-btn"}
+          disabled={isNextBtnDisabled}
+          onClick={handleClickNext}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

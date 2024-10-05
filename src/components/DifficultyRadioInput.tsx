@@ -1,13 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
-import { DifficultyType } from "../types";
+import { IDifficultyRadioInputProps, Difficulty } from "../types";
 
-interface DifficultyRadioInputProps {
-  setDifficulty: Dispatch<SetStateAction<DifficultyType>>;
-}
-
-const DifficultyRadioInput = ({ setDifficulty }: DifficultyRadioInputProps) => {
+const DifficultyRadioInput = ({
+  setDifficulty,
+}: IDifficultyRadioInputProps) => {
   const onDifficultyChange = (nextVal: string) => {
-    setDifficulty(nextVal as DifficultyType);
+    setDifficulty(nextVal as Difficulty);
   };
 
   return (

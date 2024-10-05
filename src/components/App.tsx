@@ -1,29 +1,41 @@
 import { useState } from "react";
 import Header from "./Header";
-import QuizSetup from "./QuizSetup";
-import { QuizStatusType, IQuestionInfo } from "../types";
 import QuizDisplay from "./QuizDisplay";
+import QuizSetup from "./QuizSetup";
+import Report from "./Report";
+import { IQuestionInfo, QuizStatus } from "../types";
 import "../styles.css";
 
 const App = () => {
-  const [allQuestions, setAllQuestions] = useState<IQuestionInfo[]>([]);
-  const [quizStatus, setQuizStatus] = useState<QuizStatusType>("notStarted");
+  const [questions, setQuestions] = useState<IQuestionInfo[]>([]);
+  const [quizStatus, setQuizStatus] = useState<QuizStatus>("notStarted");
+  const [noOfCorrectAnswers, setNoOfCorrectAnswers] = useState<number>(0);
+
+  const handleReturnToQuizSetup = () => {
+    setQuizStatus("notStarted");
+    setNoOfCorrectAnswers(0);
+  };
 
   return (
     <div className="app">
-      <Header></Header>
+      <Header />
       {quizStatus === "notStarted" && (
-        <QuizSetup
-          setAllQuestions={setAllQuestions}
-          setQuizStatus={setQuizStatus}
-        ></QuizSetup>
+        <QuizSetup setQuestions={setQuestions} setQuizStatus={setQuizStatus} />
       )}
-      {quizStatus !== "notStarted" && (
+      {quizStatus == "inProgress" && (
         <QuizDisplay
-          allQuestions={allQuestions}
-          quizStatus={quizStatus}
+          questions={questions}
           setQuizStatus={setQuizStatus}
-        ></QuizDisplay>
+          setNoOfCorrectAnswers={setNoOfCorrectAnswers}
+          handleReturnToQuizSetup={handleReturnToQuizSetup}
+        />
+      )}
+      {quizStatus === "completed" && (
+        <Report
+          noOfCorrectAnswers={noOfCorrectAnswers}
+          totalQuestions={questions.length}
+          handleReturnToQuizSetup={handleReturnToQuizSetup}
+        />
       )}
     </div>
   );

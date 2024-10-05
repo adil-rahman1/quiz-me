@@ -1,28 +1,18 @@
-import { IQuestionInfo, IAnswerInfo } from "../types";
+import { ISingleQuestionProps, IAnswerInfo } from "../types";
 import shuffle from "../shuffleArray";
 import { useEffect } from "react";
-
-interface SingleQuestionProps {
-  questionInfo: IQuestionInfo;
-  selectedAnswer: number | null;
-  setSelectedAnswer: React.Dispatch<React.SetStateAction<number | null>>;
-  answerIsSubmitted: boolean;
-  allAnswers: IAnswerInfo[];
-  setAllAnswers: React.Dispatch<React.SetStateAction<IAnswerInfo[]>>;
-  currentQNo: number;
-  totalQuestions: number;
-}
+import decodeHtml from "../decodeHtml";
 
 const SingleQuestion = ({
   questionInfo,
   selectedAnswer,
   setSelectedAnswer,
-  answerIsSubmitted,
-  allAnswers,
-  setAllAnswers,
+  isAnswerSubmitted,
+  answers,
+  setAnswers,
   currentQNo,
   totalQuestions,
-}: SingleQuestionProps) => {
+}: ISingleQuestionProps) => {
   useEffect(() => {
     const answers: string[] = [
       questionInfo.correct_answer,
@@ -47,7 +37,7 @@ const SingleQuestion = ({
       });
     }
 
-    setAllAnswers(
+    setAnswers(
       answersAsAnswerInfoList.length === 2
         ? answersAsAnswerInfoList
         : shuffle(answersAsAnswerInfoList)
@@ -58,31 +48,53 @@ const SingleQuestion = ({
     setSelectedAnswer(selectedAnswer === idx ? null : idx);
   };
 
+  const getClass = (idx: number) => {
+    const classes = ["answer-btn"];
+    const isSelected = selectedAnswer === idx;
+    const isCorrect = answers[idx].isCorrect;
+    const isSelectedCorrect =
+      selectedAnswer !== null && answers[selectedAnswer]?.isCorrect;
+
+    if (isSelected) {
+      classes.push("selected-answer-btn");
+    }
+
+    if (isAnswerSubmitted) {
+      classes.push("locked");
+
+      if (isSelected && !isSelectedCorrect) {
+        classes.push("incorrect-answer-btn");
+      }
+
+      if (isCorrect) {
+        classes.push("correct-answer-btn");
+      }
+    }
+
+    return classes.join(" ");
+  };
+
   return (
     <>
-      <div>
+      <div className="question-container">
         <h1 className="progress">
           Question <span className="question-number">{currentQNo + 1}</span>/
           {totalQuestions}
         </h1>
-        <p className="question-text">{questionInfo.question}</p>
+        <p className="question-text">{decodeHtml(questionInfo.question)}</p>
       </div>
-      <div className="answer-grid">
-        {allAnswers.map((answer, idx) => (
+      <div className="answer-grid-container">
+        {answers.map((answer, idx) => (
           <button
-            className={
-              selectedAnswer === idx
-                ? "answer-btn selected-answer-btn"
-                : "answer-btn"
-            }
+            className={getClass(idx)}
             type="button"
             key={idx}
             onClick={() => {
               handleSelectAnAnswer(idx);
             }}
-            disabled={answerIsSubmitted}
+            disabled={isAnswerSubmitted}
           >
-            {answer.text}
+            {decodeHtml(answer.text)}
           </button>
         ))}
       </div>

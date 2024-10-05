@@ -1,27 +1,34 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { ICategoryInfo } from "../types";
+import { useEffect, useState } from "react";
+import { ICategoryInputProps, ICategoryInfo } from "../types";
 import axios from "axios";
 
-interface CategoryInputProps {
-  setSelectedCategoryInfo: Dispatch<SetStateAction<ICategoryInfo>>;
-}
-
-const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
-  const [allCategories, setAllCategories] = useState<ICategoryInfo[]>([]);
+const CategoryInput = ({ setSelectedCategoryInfo }: ICategoryInputProps) => {
+  const [categories, setCategories] = useState<ICategoryInfo[]>([]);
 
   useEffect(() => {
-    const fetchAndStoreAllCategories = async () => {
+    const fetchAndStoreCategories = async () => {
       try {
         const response = await axios.get(
           "https://opentdb.com/api_category.php"
         );
-        setAllCategories(response.data.trivia_categories);
+        setCategories(response.data.trivia_categories);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchAndStoreAllCategories();
+    fetchAndStoreCategories();
   }, []);
+
+  const handleChangeCategory = (categoryName: string) => {
+    if (categoryName === "none") {
+      setSelectedCategoryInfo(null);
+    } else {
+      const categoryInfo: ICategoryInfo = categories.filter(
+        (catInfo: ICategoryInfo) => catInfo.name === categoryName
+      )[0];
+      setSelectedCategoryInfo(categoryInfo);
+    }
+  };
 
   return (
     <div className="select-container">
@@ -30,17 +37,10 @@ const CategoryInput = ({ setSelectedCategoryInfo }: CategoryInputProps) => {
       <select
         className="select-input"
         id="category"
-        onChange={(e) => {
-          const categoryInfo: ICategoryInfo = allCategories.filter(
-            (catInfo: ICategoryInfo) => catInfo.name === e.target.value
-          )[0];
-          setSelectedCategoryInfo({
-            id: categoryInfo.id,
-            name: categoryInfo.name,
-          });
-        }}
+        onChange={(e) => handleChangeCategory(e.target.value)}
       >
-        {allCategories.map((data) => (
+        <option value="none">Choose a category</option>
+        {categories.map((data) => (
           <option key={data.id} value={data.name}>
             {data.name}
           </option>

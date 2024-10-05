@@ -1,16 +1,21 @@
-interface ReportProps {
-  correctAnswers: number;
-  totalQuestions: number;
-}
+import { IReportProps } from "../types";
+import ReturnToQuizSetupBtn from "./ReturnToQuizSetupBtn";
 
-const Report = ({ correctAnswers, totalQuestions }: ReportProps) => {
-  const scoreAsPercentage = Math.floor((correctAnswers * 100) / totalQuestions);
+const Report = ({
+  noOfCorrectAnswers,
+  totalQuestions,
+  handleReturnToQuizSetup,
+}: IReportProps) => {
+  const scoreAsPercentage = Math.floor(
+    (noOfCorrectAnswers * 100) / totalQuestions
+  );
   return (
-    <>
-      <p className="report">
-        You scored {scoreAsPercentage}% ({correctAnswers}/{totalQuestions})
+    <div className="report">
+      <p>
+        You scored {scoreAsPercentage}% ({noOfCorrectAnswers}/{totalQuestions})
       </p>
-    </>
+      <ReturnToQuizSetupBtn onClick={handleReturnToQuizSetup} />
+    </div>
   );
 };
 
