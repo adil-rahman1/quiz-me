@@ -208,4 +208,15 @@ fieldset {
     display: flex;
     gap: 10px;
   }
+
+  .answer-grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .action-btns {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
