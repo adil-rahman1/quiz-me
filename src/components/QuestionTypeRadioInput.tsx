@@ -13,28 +13,31 @@ const QuestionTypeRadioInput = ({
         <legend className="legend">Type</legend>
       </div>
       <div className="radio-group">
-        <input
-          type="radio"
-          name="questionType"
-          id="multiple"
-          value="multiple"
-          defaultChecked={true}
-          onChange={(e) => onQuestionTypeChange(e.target.value)}
-        />
-        <label className="label" htmlFor="multiple">
-          Multiple
-        </label>
-
-        <input
-          type="radio"
-          name="questionType"
-          id="boolean"
-          value="boolean"
-          onChange={(e) => onQuestionTypeChange(e.target.value)}
-        />
-        <label className="label" htmlFor="boolean">
-          True or False
-        </label>
+        <div className="radio-item">
+          <input
+            type="radio"
+            name="questionType"
+            id="multiple"
+            value="multiple"
+            defaultChecked={true}
+            onChange={(e) => onQuestionTypeChange(e.target.value)}
+          />
+          <label className="label" htmlFor="multiple">
+            Multiple
+          </label>
+        </div>
+        <div className="radio-item">
+          <input
+            type="radio"
+            name="questionType"
+            id="boolean"
+            value="boolean"
+            onChange={(e) => onQuestionTypeChange(e.target.value)}
+          />
+          <label className="label" htmlFor="boolean">
+            True or False
+          </label>
+        </div>
       </div>
     </fieldset>
   );
