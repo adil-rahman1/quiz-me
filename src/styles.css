@@ -21,7 +21,7 @@ body {
   padding: 16px;
   border-radius: 8px;
   width: 600px;
-  height: 450px;
+  min-height: 450px;
 }
 
 .header {
@@ -87,7 +87,7 @@ fieldset {
 }
 
 .question-container {
-  height: 160px;
+  min-height: 160px;
 }
 
 .progress,
@@ -176,8 +176,11 @@ fieldset {
 
 @media screen and (max-width: 480px) {
   .app {
-    width: 70vw;
-    min-height: 60vh;
+    width: 85vw;
+  }
+
+  .header {
+    font-size: 1.5rem;
   }
 
   .quiz-setup {
@@ -209,14 +212,25 @@ fieldset {
     gap: 10px;
   }
 
+  .question-number {
+    font-size: 1.3rem;
+  }
+
+  .question-text,
+  .answer-grid-container button,
+  .action-btns button {
+    font-size: 0.8rem;
+  }
+
   .answer-grid-container {
     grid-template-columns: 1fr;
+    height: inherit;
   }
 
   .action-btns {
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
   }
 }
